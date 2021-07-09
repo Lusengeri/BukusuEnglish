@@ -1,0 +1,77 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="CustomAppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <!-- The color of the app bar -->
+        <item name="colorPrimary">@color/primaryLight</item>
+        <item name="colorPrimaryDark">@color/secondaryLight</item>
+        <item name="colorSecondary">@color/secondaryLight</item>
+        <item name="editTextColor">@color/secondaryLight</item>
+        <item name="android:textColorPrimary">@color/secondaryLight</item>
+        <item name="android:textColorSecondary">@color/secondaryLight</item>
+        <item name="android:textColor">@color/primaryLight</item>
+        <item name="android:textColorHint">@color/hintColorLight</item>
+        <item name="android:textColorHighlight">@color/surfaceDark</item>
+        <item name="android:textColorTertiary">@android:color/darker_gray</item>
+        <!--item name="colorOnPrimary">@color/brightWhite</item-->
+
+
+        <!-- The color of the blinking cursor when in searchView -->
+        <!--item name="colorAccent">@android:color/white</item-->
+    </style>
+
+    <style name="CustomAppTheme2" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- The color of the app bar -->
+        <item name="colorPrimary">@color/primaryDark</item>
+        <!-- The color of the band above the app-->
+        <item name="colorPrimaryDark">@color/surfaceDark</item>
+        <!-- The color of the blinking cursor of the Searchview -->
+        <item name="colorSecondary">@color/secondaryDark</item>
+        <!-- Color of the app title and hidden menu options -->
+        <item name="android:textColorPrimary">@color/secondaryDark</item>
+        <!-- Overrides the attribute 'textColorPrimary' for the hidden menu options -->
+        <item name="android:textColor">@color/secondaryDark</item>
+        <!-- The color of the text being typed into the Searchview-->
+        <item name="editTextColor">@color/secondaryDark</item>
+        <!-- The colour of the query hint text -->
+        <item name="android:textColorHint">@color/hintColorDark</item>
+        <!-- The color of the search icon, cancel-search icon, search-button and '3-dot' button -->
+        <item name="android:textColorSecondary">@color/secondaryDark</item>
+        <!-- The colour of the general background where the definitions appear -->
+        <item name="android:colorBackground">@color/surfaceDark</item>
+        <!-- Specifically affects the overflow menu -->
+        <item name="colorSurface">@color/primaryDark</item>
+        <!-- Experimental -->
+        <item name="android:textColorHighlight">@color/colorAccent</item>
+        <item name="android:textColorTertiary">@android:color/darker_gray</item>
+
+    </style>
+
+    <!-- ToolBar -->
+    <style name="ToolBarStyle2" parent="CustomAppTheme">
+        <!-- The colour of the text typed into the searchview -->
+        <item name="android:editTextColor">@android:color/white</item>
+        <!-- Color of the app title and hidden menu options -->
+        <item name="android:textColorPrimary">@color/lightGrey</item>
+        <!-- Overrides the attribute 'textColorPrimary' for the hidden menu options -->
+        <item name="android:textColor">@android:color/black</item>
+        <!-- The color of the search icon, cancel-search icon, search-button and '3-dot' button -->
+        <item name="android:textColorSecondary">@color/lightGrey</item>
+        <!-- The colour of the query hint text -->
+        <item name="android:textColorHint">@color/lightGrey</item>
+        <!-- Specifically affects the overflow menu -->
+        <item name="colorSurface">@color/surfaceDark</item>
+        <!--item name="android:textColor">@color/fullBlack</item-->
+        <!--item name="android:background">@color/primaryBlue</item-->
+        <!--item name="actionOverflowButtonStyle">@style/ActionButtonOverflowStyle</item-->
+        <!--item name="drawerArrowStyle">@style/DrawerArrowStyle</item-->
+    </style>
+
+</resources>

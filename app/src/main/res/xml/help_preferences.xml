@@ -1,0 +1,17 @@
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <Preference
+        app:fragment="com.example.newdictionary.HelpAndFeedbackActivity$HelpFragment"
+        app:icon="@android:drawable/ic_menu_help"
+        app:title="@string/help_menu_header"/>
+
+    <Preference
+        app:icon="@android:drawable/ic_dialog_email"
+        app:title="@string/feedback_header"
+        app:summary="Report technical issues or suggest new features"/>
+
+    <Preference
+        app:icon="@android:drawable/ic_menu_info_details"
+        app:title="@string/about_header"/>
+
+</PreferenceScreen>

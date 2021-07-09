@@ -1,0 +1,149 @@
+<resources>
+    <string name="app_name">Bukusu-English Dictionary</string>
+    <string name="settings_menu_option_string">Display Settings</string>
+    <string name="about_menu_option_string">About</string>
+    <string name="help_menu_option_string">Help &amp; Feedback</string>
+    <string name="rate_option_string">Rate the App</string>
+    <string name="invitation_option_string">Invite Friends</string>
+    <string name="default_view_text">Search for or look-up a Lubukusu word to view its definition in English</string>
+    <string name="word_not_found_placeholder">Word not found. Recheck spelling or look-up instead.</string>
+    <string name="help_menu_header">App usage and general information</string>
+    <string name="feedback_header"> Contact Us</string>
+    <string name="about_header">About</string>
+    <string name="recent">RECENT</string>
+    <string name="look_up">LOOK UP</string>
+    <string name="title_activity_help_and_feedback">Help &amp; Feedback</string>
+    <string name="title_activity_settings">Display Settings</string>
+    <string name="help_text">
+<![CDATA[
+	 <h2>About</h2>
+
+	 <p>
+	 The Lubukusu-English dictionary app is based on the draft of the &#34;Bukusu-English Dictionary&#34;
+	 compiled and edited by Michael Marlo, Adrian Sifuna, Aggrey Wasike (2008).
+	 </p>
+
+	 <p>
+	 The dictionary retains all the tone marking of the original source but also includes the
+	 spelling of words as commonly spelled/used.
+	 </p>
+
+	<h2>Transcription</h2>
+		 <p>
+			 In the present transcription system, long vowels are marked as a sequence of two vowels, e.g.,
+			 [aa]
+		 </p>
+		 <p> A syllable boundary between two vowels is marked by &#39;.&#39;.</p>
+		 <p>High-tone is marked with an acute accent.</p>
+		<p>Low-tone is unmarked, &#39;b&#39; represents [b] after a nasal and [β] elsewhere, &#39;ch&#39;
+	represents [č], &#39;sh&#39; represents [š], &#39;kh&#39; represents [x], &#39;ng&#39;&#39; (&#39;ng&#39; followed by an apostrophe)
+	represents [ŋ], &#39;nj&#39; represents [ñǰ], and &#39;ng&#39; represents [ŋg].</p> <p>In general, &#39;ny&#39; should represent
+	the palatal nasal [ñ], although there may be cases where the same orthographic sequence
+	represents the sequence of a coronal nasal followed by a palatal glide, i.e., [ny].
+	</p>
+
+	<h2>Abbreviations</h2>
+	<p>
+	The following abbreviations are used to mark parts of speech:
+	</p>
+	<p>&nbsp; &#39;adj&#39; &nbsp; adjective</p>
+	<p>
+	&nbsp; &#39;adv&#39; &nbsp; adverb
+	</p>
+	<p>
+		&nbsp; &#39;comp&#39; &nbsp;
+complement
+	</p>
+	<p>
+&nbsp; &#39;conj&#39; &nbsp;
+conjunction
+	</p>
+	<p>
+&nbsp; &#39;dem&#39; &nbsp;
+demonstrative
+	</p>
+	<p>
+&nbsp; &#39;excl&#39; &nbsp;
+exclamation
+	</p>
+	<p>
+&nbsp; &#39;ideo&#39; &nbsp;
+ideophone
+	</p>
+	<p>
+&nbsp; &#39;loc&#39; &nbsp;
+locative
+	</p>
+<p>
+&nbsp; &#39;n&#39; &nbsp;
+noun
+</p>
+&nbsp; &#39;neg&#39; &nbsp;
+negation element
+</p>
+<p>
+&nbsp; &#39;np&#39; &nbsp;
+noun phrase
+</p>
+<p>
+&nbsp; &#39;num&#39; &nbsp;
+numeral
+</p>
+<p>
+&nbsp; &#39;poss&#39; &nbsp;
+possessive pronoun
+</p>
+<p>
+&nbsp; &#39;pp&#39; &nbsp;
+prepositional phrase
+</p>
+&nbsp; &#39;prep&#39; &nbsp;
+preposition
+</p>
+<p>
+&nbsp; &#39;pron&#39; &nbsp;
+pronoun
+</p>
+<p>
+&nbsp; &#39;quan&#39; &nbsp;
+quantifier
+</p>
+<p>
+&nbsp; &#39;relcl&#39; &nbsp;
+relative clause
+</p>
+<p>
+&nbsp; &#39;s&#39; &nbsp;
+sentence
+</p>
+<p>
+&nbsp; &#39;v&#39; &nbsp;
+verb
+</p>
+<p>
+&nbsp; &#39;vint&#39; &nbsp;
+intransitive verb
+</p>
+<p>
+&nbsp; &#39;vrefl&#39; &nbsp;
+reflexivized verb
+</p>
+<p>
+&nbsp; &#39;vpass&#39; &nbsp;
+passivized verb
+</p>
+<p>
+&nbsp; &#39;vtr&#39; &nbsp;
+transitive verb
+</p>
+<p>
+&nbsp; &#39;vp&#39; &nbsp;
+verb phrase
+</p>
+<p>
+&nbsp; &#39;wh&#39; &nbsp;
+wh- (question) element
+</p>
+	 ]]>
+    </string>
+</resources>

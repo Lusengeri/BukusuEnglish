@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#6200EE</color>
+    <color name="colorPrimaryDark">#3700B3</color>
+    <color name="colorAccent">#03DAC5</color>
+
+    <color name="primaryLight">#0D47A1</color>
+    <color name="secondaryBlue">#00A4DE</color>
+    <color name="brightWhite">#FFFFFF</color>
+    <color name="defaultAppBarText">#FFFFFF</color>
+    <color name="fullBlack">#000000</color>
+    <color name="lightGrey">#ADADAD</color>
+    <color name="red">#FF1100</color>
+
+    <color name="primaryDark">#263238</color>
+    <color name="secondaryLight">#E3F2FD</color>
+    <color name="secondaryDark">#ECEFF1</color>
+    <color name="hintColorDark">#90A4AE</color>
+    <color name="hintColorLight">#4FC3F7</color>
+    <color name="surfaceDark">#37474F</color>
+    <color name="lightSystemMenu">#1565C0</color>
+</resources>
