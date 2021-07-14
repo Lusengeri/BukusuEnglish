@@ -34,6 +34,7 @@ public class MyWordRecyclerViewAdapter extends RecyclerView.Adapter<MyWordRecycl
         /* mMapIndex holds the indices within the created dataset at which each letter begins */
         mMapIndex = calculateIndexesForName(items);
     }
+
     private HashMap<String, Integer> calculateIndexesForName(ArrayList<String> items) {
         HashMap<String, Integer> mapIndex = new LinkedHashMap<>();
         for (int i = 0; i<items.size(); i++){

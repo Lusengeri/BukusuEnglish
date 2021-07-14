@@ -61,34 +61,12 @@ public class WordListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_word_list, container, false);
-        // Set the adapter
-
-        FastScrollerRecyclerView recyclerView = (FastScrollerRecyclerView) view.findViewById(R.id.list);
+        FastScrollerRecyclerView recyclerView = view.findViewById(R.id.list);
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(new MyWordRecyclerViewAdapter(wordCursor, mListener));
         FastScrollRecyclerViewItemDecoration decoration = new FastScrollRecyclerViewItemDecoration(view.getContext());
         recyclerView.addItemDecoration(decoration);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
-
-        /*
-        if (view instanceof FastScrollerRecyclerView) {
-            Context context = view.getContext();
-            FastScrollerRecyclerView recyclerView = (FastScrollerRecyclerView) view;
-
-            if (mColumnCount <= 1) {
-                recyclerView.setLayoutManager(new LinearLayoutManager(context));
-            } else {
-                recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
-            }
-
-
-            recyclerView.setHasFixedSize(true);
-            recyclerView.setAdapter(new MyWordRecyclerViewAdapter(wordCursor, mListener));
-            FastScrollRecyclerViewItemDecoration decoration = new FastScrollRecyclerViewItemDecoration(context);
-            recyclerView.addItemDecoration(decoration);
-            recyclerView.setItemAnimator(new DefaultItemAnimator());
-        }
-        */
         return view;
     }
 

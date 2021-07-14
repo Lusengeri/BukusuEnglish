@@ -69,8 +69,7 @@ public class MainActivity extends BaseActivity  implements  WordListFragment.OnL
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.options_menu, menu);
+        getMenuInflater().inflate(R.menu.options_menu, menu);
         MenuItem searchViewItem = menu.findItem(R.id.app_bar_search);
 
         searchView = (SearchView) searchViewItem.getActionView();
@@ -157,7 +156,6 @@ public class MainActivity extends BaseActivity  implements  WordListFragment.OnL
                 return false;
             }
         });
-
         return true;
     }
 
