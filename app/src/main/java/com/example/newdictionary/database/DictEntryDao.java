@@ -1,5 +1,7 @@
 package com.example.newdictionary.database;
 
+import android.database.Cursor;
+
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.room.Dao;
@@ -9,12 +11,12 @@ import java.util.List;
 
 @Dao
 public interface DictEntryDao {
-    @Query("SELECT * FROM definitions")
-    LiveData<List<DictEntry>> getAllEntries();
+    @Query("SELECT _id, unaccented FROM definitions")
+    Cursor getAllEntries();
 
     @Query("SELECT * FROM definitions WHERE unaccented = :query")
     List<DictEntry> getDefinition(String query);
 
-    @Query("SELECT * FROM definitions WHERE unaccented LIKE :searchTerm")
-    List<DictEntry> getSearchSuggestions(String searchTerm);
+    @Query("SELECT _id, unaccented FROM definitions WHERE unaccented LIKE :searchTerm")
+    Cursor getSearchSuggestions(String searchTerm);
 }

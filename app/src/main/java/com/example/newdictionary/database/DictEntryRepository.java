@@ -1,6 +1,7 @@
 package com.example.newdictionary.database;
 
 import android.app.Application;
+import android.database.Cursor;
 import android.os.AsyncTask;
 
 import androidx.lifecycle.LiveData;
@@ -9,28 +10,27 @@ import androidx.lifecycle.MutableLiveData;
 import java.util.List;
 
 public class DictEntryRepository {
-    private final LiveData<List<DictEntry>> allEntries;
+    private Cursor wordList;
     private MutableLiveData<DictEntry> currentWord = new MutableLiveData<>();
-    private MutableLiveData<List<DictEntry>> suggestions = new MutableLiveData<>();
+    private MutableLiveData<Cursor> suggestionsList = new MutableLiveData<>();
     private DictEntryDao dictEntryDao;
 
     public DictEntryRepository(Application application) {
         DictEntryDatabase db;
         db = DictEntryDatabase.getDatabaseInstance(application);
         dictEntryDao = db.dictEntryDao();
-        allEntries = dictEntryDao.getAllEntries();
+        wordList = db.getOpenHelper().getWritableDatabase().query("SELECT unaccented FROM definitions");
     }
 
-    private void getDefinitionFinished(List<DictEntry> results) {
-        currentWord.setValue(results.get(0));
+    public Cursor getWordList() {
+        return wordList;
     }
 
-    protected class GetDefinitionAsyncTask extends AsyncTask<String, Void, List<DictEntry>> {
-
+    protected class GetCurrentWordAsyncTask extends AsyncTask<String, Void, List<DictEntry>> {
         private DictEntryDao dao;
         private DictEntryRepository delegate;
 
-        public GetDefinitionAsyncTask(DictEntryDao dictEntryDao, DictEntryRepository caller) {
+        public GetCurrentWordAsyncTask(DictEntryDao dictEntryDao, DictEntryRepository caller) {
             dao = dictEntryDao;
             delegate = caller;
         }
@@ -42,16 +42,23 @@ public class DictEntryRepository {
 
         @Override
         protected void onPostExecute(List<DictEntry> result) {
-            delegate.getDefinitionFinished(result);
+            delegate.getCurrentWordFinished(result);
         }
     }
 
-    private void getSuggestionsFinished(List<DictEntry> result) {
-        suggestions.setValue(result);
+    private void getCurrentWordFinished(List<DictEntry> results) {
+        if (!results.isEmpty()) {
+            currentWord.setValue(results.get(0));
+        } else {
+            currentWord.setValue(null);
+        }
     }
 
-    protected class GetSuggestionsAsyncTask extends AsyncTask<String, Void, List<DictEntry>> {
+    public LiveData<DictEntry> getCurrentWord() {
+        return currentWord;
+    }
 
+    protected class GetSuggestionsAsyncTask extends AsyncTask<String, Void, Cursor> {
         private DictEntryDao dao;
         private DictEntryRepository delegate;
 
@@ -61,32 +68,30 @@ public class DictEntryRepository {
         }
 
         @Override
-        protected List<DictEntry> doInBackground(String... strings) {
+        protected Cursor doInBackground(String... strings) {
             return dao.getSearchSuggestions(strings[0]);
         }
 
         @Override
-        protected void onPostExecute(List<DictEntry> result) {
+        protected void onPostExecute(Cursor result) {
             delegate.getSuggestionsFinished(result);
         }
     }
 
-    public LiveData<List<DictEntry>> getAllEntries() {
-        return allEntries;
+    private void getSuggestionsFinished(Cursor result) {
+        suggestionsList.setValue(result);
     }
 
-    public LiveData<DictEntry> getCurrentWord() {
-        return currentWord;
+    public LiveData<Cursor> getSuggestionsList() {
+        return suggestionsList;
     }
 
-    public void getDefinition(String query) {
-        //Should not be on main thread
-        GetDefinitionAsyncTask task = new GetDefinitionAsyncTask(dictEntryDao, this);
+    public void searchForWord(String query) {
+        GetCurrentWordAsyncTask task = new GetCurrentWordAsyncTask(dictEntryDao, this);
         task.execute(query);
     }
 
-    public void getSearchSuggestions(String searchTerm) {
-        //Should not be on main thread
+    public void searchForSuggestions(String searchTerm) {
         GetSuggestionsAsyncTask task = new GetSuggestionsAsyncTask(dictEntryDao, this);
         task.execute(searchTerm);
     }

@@ -5,23 +5,27 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-/**
- * A simple {@link Fragment} subclass.
- */
-public class SearchResultFragment extends Fragment {
+import com.example.newdictionary.database.DictEntry;
+import com.example.newdictionary.ui.main.MainViewModel;
 
+public class SearchResultFragment extends Fragment {
     private TextView wordView;
     private TextView pronunciationView;
     private TextView definitionView;
     private View dividingLine;
-    private MainActivity parent;
+
+    private MainActivity parentActivity;
+    private MainViewModel mainViewModel;
 
     public SearchResultFragment() {
         // Required empty public constructor
@@ -31,7 +35,7 @@ public class SearchResultFragment extends Fragment {
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
         try {
-            parent = (MainActivity) context;
+            parentActivity = (MainActivity) context;
         } catch (ClassCastException e) {
             throw new ClassCastException(context.toString() + "must be ....");
         }
@@ -49,6 +53,26 @@ public class SearchResultFragment extends Fragment {
         return view;
     }
 
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        mainViewModel = parentActivity.getMainViewModel();
+
+        Observer<DictEntry> currentWordObserver = new Observer<DictEntry>() {
+            @Override
+            public void onChanged(DictEntry dictEntry) {
+                if (dictEntry == null) {
+                    Log.i("info", "Null DictEntry!");
+                    showUnsuccessful();
+                } else {
+                    showSelectedDefinition(dictEntry.getWord(), dictEntry.getPos(), dictEntry.getDefinition(),
+                            dictEntry.getUnaccented());
+                }
+            }
+        };
+        mainViewModel.currentWord.observe(getViewLifecycleOwner(), currentWordObserver);
+    }
+
     public void showSelectedDefinition(String word, String pos, String definition, String spelled) {
         wordView.setVisibility(View.VISIBLE);
         pronunciationView.setVisibility(View.VISIBLE);
@@ -62,7 +86,7 @@ public class SearchResultFragment extends Fragment {
             pronunciationView.setText("|" + word + "|");
             definitionView.setText("1. " + definition);
 
-            SharedPreferences.Editor editor = parent.getPreferences(MainActivity.MODE_PRIVATE).edit();
+            SharedPreferences.Editor editor = parentActivity.getPreferences(MainActivity.MODE_PRIVATE).edit();
             editor.putString("word", wordView.getText().toString());
             editor.putString("definition", definitionView.getText().toString());
             editor.putString("pos", pronunciationView.getText().toString());
@@ -71,7 +95,7 @@ public class SearchResultFragment extends Fragment {
     }
 
     private void setDefaultDefinitionText() {
-        SharedPreferences preferences = parent.getPreferences(MainActivity.MODE_PRIVATE);
+        SharedPreferences preferences = parentActivity.getPreferences(MainActivity.MODE_PRIVATE);
         String prev_word = preferences.getString("word", null);
         String prev_pos = preferences.getString("pos", null);
         String prev_definition = preferences.getString("definition", null);

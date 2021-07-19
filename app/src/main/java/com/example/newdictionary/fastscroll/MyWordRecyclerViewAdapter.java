@@ -1,4 +1,4 @@
-package com.example.newdictionary;
+package com.example.newdictionary.fastscroll;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -9,31 +9,32 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.newdictionary.WordListFragment.OnListFragmentInteractionListener;
-import com.example.newdictionary.fastscroll.FastScrollerRecyclerViewInterface;
+import com.example.newdictionary.DictionaryFragmentsListener;
+import com.example.newdictionary.R;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
+import java.util.List;
 
 public class MyWordRecyclerViewAdapter extends RecyclerView.Adapter<MyWordRecyclerViewAdapter.ViewHolder>
                                         implements FastScrollerRecyclerViewInterface {
-    private Cursor wCursor;
-    private OnListFragmentInteractionListener mListener;
-    private HashMap<String, Integer> mMapIndex;
+    private final DictionaryFragmentsListener mListener;
+    private HashMap<String, Integer> mMapIndex = new HashMap<>();
+    private final Cursor wordList;
 
-    public MyWordRecyclerViewAdapter(Cursor cursor, OnListFragmentInteractionListener listener) {
-        wCursor = cursor;
+    public MyWordRecyclerViewAdapter(DictionaryFragmentsListener listener) {
         mListener = listener;
+        wordList = mListener.getWordList();
 
-        ArrayList<String> items = new ArrayList<>();
-        while (wCursor.moveToNext()) {
-            items.add(wCursor.getString(4));
+        ArrayList<String> wordArrayList = new ArrayList<>();
+        while ( wordList.moveToNext()) {
+            wordArrayList.add(wordList.getString(0));
         }
-
-        /* mMapIndex holds the indices within the created dataset at which each letter begins */
-        mMapIndex = calculateIndexesForName(items);
+        mMapIndex = calculateIndexesForName(wordArrayList);
     }
+
 
     private HashMap<String, Integer> calculateIndexesForName(ArrayList<String> items) {
         HashMap<String, Integer> mapIndex = new LinkedHashMap<>();
@@ -64,14 +65,14 @@ public class MyWordRecyclerViewAdapter extends RecyclerView.Adapter<MyWordRecycl
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
-        wCursor.moveToPosition(position);
-        holder.wordView.setText(wCursor.getString(4));
+        //String word = wordList.get(position);
+        wordList.moveToPosition(position);
+        String word = wordList.getString(0);
+        holder.wordView.setText(word);
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (null != mListener) {
-                    // Notify the active callbacks interface (the activity, if the
-                    // fragment is attached to one) that an item has been selected.
                     mListener.onListFragmentInteraction(holder.wordView.getText().toString());
                 }
             }
@@ -80,12 +81,14 @@ public class MyWordRecyclerViewAdapter extends RecyclerView.Adapter<MyWordRecycl
 
     @Override
     public HashMap<String, Integer> getMapIndex() {
-        return this.mMapIndex;
+        return mMapIndex;
     }
+
+
 
     @Override
     public int getItemCount() {
-        return wCursor.getCount();
+        return wordList.getCount();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {

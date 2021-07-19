@@ -1,5 +1,3 @@
-
-CREATE TABLE definitions (_id INTEGER PRIMARY KEY, word text, pos text, definition text, unaccented text);
 INSERT INTO definitions (word, pos, definition, unaccented) VALUES ('a-', 'loc', 'near', 'a-');
 INSERT INTO definitions (word, pos, definition, unaccented) VALUES ('-a (sya) sí?', 'wh', 'why, what for?', '-a (sya) si?');
 INSERT INTO definitions (word, pos, definition, unaccented) VALUES ('-a (sya) síina?', 'wh', 'why, what for? (specific)', '-a (sya) sina?');

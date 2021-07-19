@@ -1,29 +1,39 @@
 package com.example.newdictionary;
 
+import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
-import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.SavedStateViewModelFactory;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
+import android.content.ContentResolver;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.CharArrayBuffer;
+import android.database.ContentObserver;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
+import android.database.DataSetObserver;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.SearchView;
-import android.widget.SimpleCursorAdapter;
 
+import com.example.newdictionary.ui.main.MainViewModel;
 import com.google.android.material.tabs.TabLayout;
 
-public class MainActivity extends BaseActivity  implements  WordListFragment.OnListFragmentInteractionListener {
+import java.util.ArrayList;
+import java.util.List;
 
-    private SimpleCursorAdapter cursorAdapter;
-    private SearchView searchView;
-    private DatabaseOpenHelper helper;
+public class MainActivity extends BaseActivity  implements  DictionaryFragmentsListener {
+    private SearchView wordSearchView;
     private ViewPager viewPager;
+    public MainViewModel mainViewModel;
+
+    public MainViewModel getMainViewModel() {
+        return mainViewModel;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,16 +43,24 @@ public class MainActivity extends BaseActivity  implements  WordListFragment.OnL
         Toolbar toolbar = findViewById(R.id.mainToolbar);
         setSupportActionBar(toolbar);
 
+        configureDataSources();
         configureTabLayout();
-
-        String [] columnNames = { "unaccented" };
-        int [] viewNames = { R.id.suggestView };
-        cursorAdapter = new SimpleCursorAdapter(this, R.layout.suggestion_list_item, null, columnNames, viewNames, 0);
-
-        helper = new DatabaseOpenHelper(getApplicationContext());
     }
 
-    void configureTabLayout() {
+    private void configureDataSources() {
+        SavedStateViewModelFactory factory = new SavedStateViewModelFactory(getApplication(),this);
+        mainViewModel = new ViewModelProvider(this, factory).get(MainViewModel.class);
+
+        Observer<Cursor> suggestionObserver = new Observer<Cursor>() {
+            @Override
+            public void onChanged(Cursor suggestions) {
+                wordSearchView.getSuggestionsAdapter().swapCursor(suggestions);
+            }
+        };
+        mainViewModel.getSuggestionsList().observe(this, suggestionObserver);
+    }
+
+    private void configureTabLayout() {
         TabLayout mainTab = findViewById(R.id.mainTab);
         PagerAdapter adapter = new MainPagerAdapter(getSupportFragmentManager(), mainTab.getTabCount());
 
@@ -72,66 +90,35 @@ public class MainActivity extends BaseActivity  implements  WordListFragment.OnL
         getMenuInflater().inflate(R.menu.options_menu, menu);
         MenuItem searchViewItem = menu.findItem(R.id.app_bar_search);
 
-        searchView = (SearchView) searchViewItem.getActionView();
-        searchView.setIconifiedByDefault(false);
-        searchView.setSubmitButtonEnabled(true);
-        searchView.setQueryHint("Search for a word");
-        searchView.setSuggestionsAdapter(cursorAdapter);
+        wordSearchView = (SearchView) searchViewItem.getActionView();
+        wordSearchView.setIconifiedByDefault(false);
+        wordSearchView.setSubmitButtonEnabled(true);
+        wordSearchView.setQueryHint("Search for a word");
+        wordSearchView.setSuggestionsAdapter(new SuggestionCursorAdapter(getApplication(),
+                null, true));
 
         String query = getPreferences(MODE_PRIVATE).getString("query", null);
 
         if (query != null) {
-            searchView.setQuery(query, false);
+            wordSearchView.setQuery(query, false);
         }
 
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+        wordSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
+                mainViewModel.searchForWord(query);
                 viewPager.setCurrentItem(0);
-
-                SQLiteDatabase db = helper.getReadableDatabase();
-                String database_query = "SELECT * FROM definitions WHERE unaccented = '" + query + "';";
-                Cursor def = db.rawQuery(database_query, null);
-
-                if (def.getCount() == 0) {
-                    for (Fragment fragment :getSupportFragmentManager().getFragments()) {
-                        if (fragment instanceof SearchResultFragment) {
-                            ((SearchResultFragment) fragment).showUnsuccessful();
-                        }
-                    }
-                    cursorAdapter.changeCursor(null);
-                } else {
-                    def.moveToFirst();
-                    String word = def.getString(1);
-                    String pos = def.getString(2);
-                    String definition = def.getString(3);
-                    String spelled = def.getString(4);
-
-                    for (Fragment fragment :getSupportFragmentManager().getFragments()) {
-                        if (fragment instanceof SearchResultFragment) {
-                            ((SearchResultFragment) fragment).showSelectedDefinition(word, pos, definition, spelled);
-                        }
-                    }
-                }
                 return false;
             }
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                SQLiteDatabase db = helper.getReadableDatabase();
-                String database_query = "SELECT * FROM definitions WHERE unaccented LIKE '" + newText + "%';";
-                Cursor def = db.rawQuery(database_query, null);
-
-                if (def.getCount() == 0) {
-                    cursorAdapter.changeCursor(null);
-                } else {
-                    cursorAdapter.changeCursor(def);
-                }
+                mainViewModel.searchForSuggestions(newText);
                 return false;
             }
         });
 
-        searchView.setOnSuggestionListener(new SearchView.OnSuggestionListener() {
+        wordSearchView.setOnSuggestionListener(new SearchView.OnSuggestionListener() {
             @Override
             public boolean onSuggestionSelect(int position) {
                 return false;
@@ -139,21 +126,11 @@ public class MainActivity extends BaseActivity  implements  WordListFragment.OnL
 
             @Override
             public boolean onSuggestionClick(int position) {
-                viewPager.setCurrentItem(0);
-
-                Cursor cursor = searchView.getSuggestionsAdapter().getCursor();
+                Cursor cursor = wordSearchView.getSuggestionsAdapter().getCursor();
                 cursor.moveToPosition(position);
-                String word = cursor.getString(1);
-                String pos = cursor.getString(2);
-                String definition = cursor.getString(3);
-                String spelled = cursor.getString(4);
-
-                for (Fragment fragment :getSupportFragmentManager().getFragments()) {
-                    if (fragment instanceof SearchResultFragment) {
-                        ((SearchResultFragment) fragment).showSelectedDefinition(word, pos, definition, spelled);
-                    }
-                }
-                return false;
+                mainViewModel.searchForWord(cursor.getString(1));
+                viewPager.setCurrentItem(0);
+                return true;
             }
         });
         return true;
@@ -166,13 +143,13 @@ public class MainActivity extends BaseActivity  implements  WordListFragment.OnL
             case (R.id.action_settings):
                 Intent intent2 = new Intent(this, DisplaySettingsActivity.class);
                 editor = getPreferences(MODE_PRIVATE).edit();
-                editor.putString("query", searchView.getQuery().toString());
+                editor.putString("query", wordSearchView.getQuery().toString());
                 editor.commit();
                 startActivity(intent2);
                 return true;
             case (R.id.action_help):
                 Intent help_feedback_intent = new Intent(this, HelpAndFeedbackActivity.class);
-                editor.putString("query", searchView.getQuery().toString());
+                editor.putString("query", wordSearchView.getQuery().toString());
                 editor.commit();
                 startActivity(help_feedback_intent);
                 return true;
@@ -183,42 +160,12 @@ public class MainActivity extends BaseActivity  implements  WordListFragment.OnL
 
     @Override
     public void onListFragmentInteraction(String word) {
-        searchForWord(word);
+        mainViewModel.searchForWord(word);
+        viewPager.setCurrentItem(0);
     }
 
     @Override
-    public Cursor getCursor() {
-        SQLiteDatabase db = helper.getReadableDatabase();
-        String database_query = "SELECT * FROM definitions";
-        Cursor def = db.rawQuery(database_query, null);
-        return def;
-    }
-
-    public void searchForWord(String query) {
-        viewPager.setCurrentItem(0);
-        SQLiteDatabase db = helper.getReadableDatabase();
-        String database_query = "SELECT * FROM definitions WHERE unaccented = '" + query + "';";
-        Cursor def = db.rawQuery(database_query, null);
-
-        if (def.getCount() == 0) {
-            for (Fragment fragment :getSupportFragmentManager().getFragments()) {
-                if (fragment instanceof SearchResultFragment) {
-                    ((SearchResultFragment) fragment).showUnsuccessful();
-                }
-            }
-            cursorAdapter.changeCursor(null);
-        } else {
-            def.moveToFirst();
-            String word = def.getString(1);
-            String pos = def.getString(2);
-            String definition = def.getString(3);
-            String spelled = def.getString(4);
-
-            for (Fragment fragment :getSupportFragmentManager().getFragments()) {
-                if (fragment instanceof SearchResultFragment) {
-                    ((SearchResultFragment) fragment).showSelectedDefinition(word, pos, definition, spelled);
-                }
-            }
-        }
+    public Cursor getWordList() {
+        return mainViewModel.getWordList();
     }
 }
