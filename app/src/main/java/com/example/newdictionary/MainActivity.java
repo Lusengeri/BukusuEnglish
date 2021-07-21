@@ -50,14 +50,6 @@ public class MainActivity extends BaseActivity  implements  DictionaryFragmentsL
     private void configureDataSources() {
         SavedStateViewModelFactory factory = new SavedStateViewModelFactory(getApplication(),this);
         mainViewModel = new ViewModelProvider(this, factory).get(MainViewModel.class);
-
-        Observer<Cursor> suggestionObserver = new Observer<Cursor>() {
-            @Override
-            public void onChanged(Cursor suggestions) {
-                wordSearchView.getSuggestionsAdapter().swapCursor(suggestions);
-            }
-        };
-        mainViewModel.getSuggestionsList().observe(this, suggestionObserver);
     }
 
     private void configureTabLayout() {
@@ -91,11 +83,18 @@ public class MainActivity extends BaseActivity  implements  DictionaryFragmentsL
         MenuItem searchViewItem = menu.findItem(R.id.app_bar_search);
 
         wordSearchView = (SearchView) searchViewItem.getActionView();
-        wordSearchView.setIconifiedByDefault(false);
+        wordSearchView.setIconifiedByDefault(true);
         wordSearchView.setSubmitButtonEnabled(true);
         wordSearchView.setQueryHint("Search for a word");
-        wordSearchView.setSuggestionsAdapter(new SuggestionCursorAdapter(getApplication(),
-                null, true));
+        wordSearchView.setSuggestionsAdapter(new SuggestionCursorAdapter(getApplication(),null, true));
+
+        Observer<Cursor> suggestionObserver = new Observer<Cursor>() {
+            @Override
+            public void onChanged(Cursor suggestions) {
+                wordSearchView.getSuggestionsAdapter().swapCursor(suggestions);
+            }
+        };
+        mainViewModel.getSuggestionsList().observe(this, suggestionObserver);
 
         String query = getPreferences(MODE_PRIVATE).getString("query", null);
 

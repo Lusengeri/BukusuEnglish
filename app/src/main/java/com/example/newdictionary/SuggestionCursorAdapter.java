@@ -8,6 +8,10 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.cursoradapter.widget.CursorAdapter;
+import androidx.preference.PreferenceManager;
+
+import java.security.KeyStore;
+import java.util.jar.Attributes;
 
 public class SuggestionCursorAdapter extends CursorAdapter {
 
@@ -25,6 +29,15 @@ public class SuggestionCursorAdapter extends CursorAdapter {
     @Override
     public void bindView(View view, Context context, Cursor cursor) {
         TextView textView = view.findViewById(R.id.suggestView);
+        int currentTheme = PreferenceManager.getDefaultSharedPreferences(context)
+                .getInt("Theme", R.style.CustomAppTheme);
+
+        if (currentTheme == R.style.CustomAppTheme) {
+            textView.setTextColor(context.getResources().getColor(R.color.primaryLight));
+        } else {
+            textView.setTextColor(context.getResources().getColor(R.color.secondaryDark));
+        }
+
         textView.setText(cursor.getString(1));
     }
 }

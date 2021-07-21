@@ -11,15 +11,17 @@
     <style name="CustomAppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- The color of the app bar -->
         <item name="colorPrimary">@color/primaryLight</item>
-        <item name="colorPrimaryDark">@color/secondaryLight</item>
+        <item name="colorPrimaryDark">@color/brightWhite</item>
         <item name="colorSecondary">@color/secondaryLight</item>
         <item name="editTextColor">@color/secondaryLight</item>
         <item name="android:textColorPrimary">@color/secondaryLight</item>
         <item name="android:textColorSecondary">@color/secondaryLight</item>
         <item name="android:textColor">@color/primaryLight</item>
         <item name="android:textColorHint">@color/hintColorLight</item>
-        <item name="android:textColorHighlight">@color/surfaceDark</item>
-        <item name="android:textColorTertiary">@android:color/darker_gray</item>
+        <item name="android:textColorHighlight">@android:color/darker_gray</item>
+        <item name="android:textColorTertiary">@color/surfaceDark</item>
+        <item name="tabBackground">@color/primaryLight</item>
+        <item name="android:colorBackground">@color/brightWhite</item>
         <!--item name="colorOnPrimary">@color/brightWhite</item-->
 
 
@@ -73,5 +75,35 @@
         <!--item name="actionOverflowButtonStyle">@style/ActionButtonOverflowStyle</item-->
         <!--item name="drawerArrowStyle">@style/DrawerArrowStyle</item-->
     </style>
+    <!--style name="LightTheme">
+            <item name="colorPrimary">@color/primaryLight</item>
+            <item name="colorSecondary">@color/secondaryBlue</item>
+            <item name="backgroundColor">@android:color/white</item>
+            <item name="hintTextColor">@color/hintColorLight</item>
+            <item name="titleTextColor">@color/primaryLight</item>
+            <item name="subtitleTextColor">@android:color/darker_gray</item>
+            <item name="cardForegroundColor">@android:color/black</item>
+        </style-->
 
+    <style name="TabThemeLight">
+        <item name="tabBackground">@color/primaryLight</item>
+        <!-- The colour of the Icon/Text when a tab is selected -->
+        <item name="colorPrimary">@color/secondaryDark</item>
+        <item name="subtitleTextColor">@android:color/holo_red_light</item>
+        <!--item name="tabTextColor">@color/brightWhite</item>
+        <item name="tabRippleColor">@color/brightWhite</item>
+        <item name="tabIndicatorColor">@color/brightWhite</item-->
+
+    </style>
+
+    <!--style name="DarkTheme">
+        <item name="colorPrimary">@color/primaryDark</item>
+        <item name="colorSecondary">@color/secondaryBlue</item>
+        <item name="backgroundColor">@color/surfaceDark</item>
+        <item name="hintTextColor">@color/hintColorDark</item>
+        <item name="titleTextColor">@color/brightWhite</item>
+        <item name="subtitleTextColor">@color/colorAccent</item>
+        <item name="cardForegroundColor">@android:color/darker_gray</item>
+
+    </style-->
 </resources>
