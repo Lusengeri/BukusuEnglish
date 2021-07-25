@@ -7,7 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".SearchResultFragment">
+    tools:context=".ui.main.DictionaryEntryFragment">
 
     <View
         android:id="@+id/dividingLine"
@@ -34,7 +34,7 @@
         android:layout_marginRight="30dp"
         android:shadowColor="#000000"
         android:singleLine="false"
-        android:textColor="?attr/android:textColor"
+        android:textColor="?android:attr/textColor"
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -51,7 +51,7 @@
         android:layout_marginTop="12dp"
         android:layout_marginEnd="30dp"
         android:layout_marginRight="30dp"
-        android:textColor="?attr/android:textColorHighlight"
+        android:textColor="?android:attr/textColorHighlight"
         android:textSize="12sp"
         android:textStyle="bold|italic"
         app:layout_constraintEnd_toEndOf="parent"
@@ -68,7 +68,7 @@
         android:layout_marginEnd="30dp"
         android:layout_marginRight="30dp"
         android:padding="10sp"
-        android:textColor="?attr/android:textColorTertiary"
+        android:textColor="?android:attr/textColorTertiary"
         android:textSize="18sp"
         android:textStyle="italic"
         app:layout_constraintEnd_toEndOf="parent"

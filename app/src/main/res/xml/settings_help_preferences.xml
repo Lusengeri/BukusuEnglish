@@ -1,0 +1,38 @@
+<PreferenceScreen
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <PreferenceCategory
+        app:title="Display"
+        app:layout="@layout/preference_category_layout">
+        <SwitchPreferenceCompat
+            app:key="theme"
+            app:title="Dark Mode"
+            app:layout="@layout/preference_option_layout"
+            app:icon="@drawable/moon_128"/>
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        app:title="Help and Feedback"
+        app:layout="@layout/preference_category_layout">
+        <Preference
+            app:fragment="com.example.newdictionary.SettingsAndHelpActivity$HelpFragment"
+            app:layout="@layout/preference_option_layout"
+            app:icon="@drawable/help_128"
+            app:title="@string/help_menu_header"/>
+
+        <Preference
+            app:icon="@drawable/mail_128"
+            app:layout="@layout/preference_option_layout"
+            app:title="@string/feedback_header"
+            app:summary="Report technical issues or suggest new features"/>
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        app:layout="@layout/preference_category_layout">
+        <Preference
+            app:icon="@drawable/about_128"
+            app:layout="@layout/preference_option_layout"
+            app:title="@string/about_header"/>
+    </PreferenceCategory>
+
+</PreferenceScreen>

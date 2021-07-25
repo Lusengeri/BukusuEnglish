@@ -9,9 +9,9 @@
         app:actionViewClass="androidx.appcompat.widget.SearchView"/>
 
     <item
-        android:id="@+id/action_settings"
+        android:id="@+id/action_settings_and_help"
         android:orderInCategory="100"
-        android:title="@string/settings_menu_option_string"/>
+        android:title="@string/settings_and_help_menu_option_string"/>
 
     <item
         android:id="@+id/action_rate_app"
@@ -23,8 +23,4 @@
         android:orderInCategory="100"
         android:title="@string/invitation_option_string"/>
 
-    <item
-        android:id="@+id/action_help"
-        android:orderInCategory="100"
-        android:title="@string/help_menu_option_string"/>
 </menu>

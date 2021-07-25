@@ -8,25 +8,18 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
-import android.content.ContentResolver;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.database.CharArrayBuffer;
-import android.database.ContentObserver;
 import android.database.Cursor;
-import android.database.DataSetObserver;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.example.newdictionary.ui.main.DictionaryFragmentsListener;
 import com.example.newdictionary.ui.main.MainViewModel;
 import com.google.android.material.tabs.TabLayout;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class MainActivity extends BaseActivity  implements  DictionaryFragmentsListener {
+public class MainActivity extends BaseActivity  implements DictionaryFragmentsListener {
     private SearchView wordSearchView;
     private ViewPager viewPager;
     public MainViewModel mainViewModel;
@@ -139,18 +132,12 @@ public class MainActivity extends BaseActivity  implements  DictionaryFragmentsL
     public boolean onOptionsItemSelected(MenuItem menuItem) {
         SharedPreferences.Editor editor = getPreferences(MODE_PRIVATE).edit();
         switch (menuItem.getItemId()) {
-            case (R.id.action_settings):
-                Intent intent2 = new Intent(this, DisplaySettingsActivity.class);
+            case (R.id.action_settings_and_help):
+                Intent settings_and_help_intent = new Intent(this, SettingsAndHelpActivity.class);
                 editor = getPreferences(MODE_PRIVATE).edit();
                 editor.putString("query", wordSearchView.getQuery().toString());
                 editor.commit();
-                startActivity(intent2);
-                return true;
-            case (R.id.action_help):
-                Intent help_feedback_intent = new Intent(this, HelpAndFeedbackActivity.class);
-                editor.putString("query", wordSearchView.getQuery().toString());
-                editor.commit();
-                startActivity(help_feedback_intent);
+                startActivity(settings_and_help_intent);
                 return true;
             default:
                 return super.onOptionsItemSelected(menuItem);

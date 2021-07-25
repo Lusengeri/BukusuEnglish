@@ -10,9 +10,6 @@ import android.widget.TextView;
 import androidx.cursoradapter.widget.CursorAdapter;
 import androidx.preference.PreferenceManager;
 
-import java.security.KeyStore;
-import java.util.jar.Attributes;
-
 public class SuggestionCursorAdapter extends CursorAdapter {
 
     public SuggestionCursorAdapter(Context context, Cursor c, boolean autoRequery) {
@@ -37,7 +34,6 @@ public class SuggestionCursorAdapter extends CursorAdapter {
         } else {
             textView.setTextColor(context.getResources().getColor(R.color.secondaryDark));
         }
-
         textView.setText(cursor.getString(1));
     }
 }

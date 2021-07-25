@@ -1,4 +1,4 @@
-package com.example.newdictionary.fastscroll;
+package com.example.newdictionary.alphabetscroll;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -10,9 +10,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.newdictionary.R;
 
-public class FastScrollRecyclerViewItemDecoration extends RecyclerView.ItemDecoration {
+public class AlphabetScrollRecyclerViewItemDecoration extends RecyclerView.ItemDecoration {
     private Context mContext;
-    public FastScrollRecyclerViewItemDecoration(Context context) {
+    public AlphabetScrollRecyclerViewItemDecoration(Context context) {
         mContext = context;
     }
 
@@ -20,13 +20,13 @@ public class FastScrollRecyclerViewItemDecoration extends RecyclerView.ItemDecor
     public void onDrawOver(Canvas canvas, RecyclerView parent, RecyclerView.State state) {
         super.onDrawOver(canvas, parent, state);
 
-        float scaledWidth = ((FastScrollerRecyclerView)parent).scaledWidth;
-        float sx = ((FastScrollerRecyclerView) parent).sx;
-        float scaledHeight= ((FastScrollerRecyclerView) parent).scaledHeight;
-        float sy = ((FastScrollerRecyclerView) parent).sy;
-        String[] sections = ((FastScrollerRecyclerView) parent).sections;
-        String section = ((FastScrollerRecyclerView) parent).section;
-        boolean showLetter = ((FastScrollerRecyclerView) parent).showLetter;
+        float scaledWidth = ((AlphabetScrollRecyclerView)parent).scaledWidth;
+        float sx = ((AlphabetScrollRecyclerView) parent).sx;
+        float scaledHeight= ((AlphabetScrollRecyclerView) parent).scaledHeight;
+        float sy = ((AlphabetScrollRecyclerView) parent).sy;
+        String[] sections = ((AlphabetScrollRecyclerView) parent).sections;
+        String section = ((AlphabetScrollRecyclerView) parent).section;
+        boolean showLetter = ((AlphabetScrollRecyclerView) parent).showLetter;
 
         int currentTheme = PreferenceManager.getDefaultSharedPreferences(mContext)
                 .getInt("Theme", R.style.CustomAppTheme);

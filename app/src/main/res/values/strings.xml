@@ -2,17 +2,17 @@
     <string name="app_name">Bukusu-English Dictionary</string>
     <string name="settings_menu_option_string">Display Settings</string>
     <string name="about_menu_option_string">About</string>
-    <string name="help_menu_option_string">Help &amp; Feedback</string>
+    <string name="settings_and_help_menu_option_string">Settings &amp; Help</string>
     <string name="rate_option_string">Rate the App</string>
     <string name="invitation_option_string">Invite Friends</string>
     <string name="default_view_text">Search for or look-up a Lubukusu word to view its definition in English</string>
     <string name="word_not_found_placeholder">Word not found. Recheck spelling or look-up instead.</string>
-    <string name="help_menu_header">App usage and general information</string>
+    <string name="help_menu_header">App usage and general info.</string>
     <string name="feedback_header"> Contact Us</string>
     <string name="about_header">About</string>
     <string name="recent">RECENT</string>
     <string name="look_up">LOOK UP</string>
-    <string name="title_activity_help_and_feedback">Help &amp; Feedback</string>
+    <string name="title_activity_settings_and_help">Settings &amp; Help</string>
     <string name="title_activity_settings">Display Settings</string>
     <string name="help_text">
 <![CDATA[
@@ -146,7 +146,5 @@ wh- (question) element
 </p>
 	 ]]>
     </string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="definition">DEFINITION</string>
 </resources>

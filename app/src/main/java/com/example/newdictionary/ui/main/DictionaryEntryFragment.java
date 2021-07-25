@@ -1,4 +1,4 @@
-package com.example.newdictionary;
+package com.example.newdictionary.ui.main;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -15,10 +15,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.newdictionary.MainActivity;
+import com.example.newdictionary.R;
 import com.example.newdictionary.database.DictEntry;
 import com.example.newdictionary.ui.main.MainViewModel;
 
-public class SearchResultFragment extends Fragment {
+public class DictionaryEntryFragment extends Fragment {
     private TextView wordView;
     private TextView pronunciationView;
     private TextView definitionView;
@@ -27,7 +29,7 @@ public class SearchResultFragment extends Fragment {
     private MainActivity parentActivity;
     private MainViewModel mainViewModel;
 
-    public SearchResultFragment() {
+    public DictionaryEntryFragment() {
         // Required empty public constructor
     }
 

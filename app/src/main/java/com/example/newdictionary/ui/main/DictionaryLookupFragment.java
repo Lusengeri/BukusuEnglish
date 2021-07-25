@@ -1,10 +1,9 @@
-package com.example.newdictionary;
+package com.example.newdictionary.ui.main;
 
 import android.content.Context;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -13,24 +12,20 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.newdictionary.database.DictEntry;
-import com.example.newdictionary.fastscroll.FastScrollRecyclerViewItemDecoration;
-import com.example.newdictionary.fastscroll.MyWordRecyclerViewAdapter;
-import com.example.newdictionary.ui.main.MainViewModel;
+import com.example.newdictionary.R;
+import com.example.newdictionary.alphabetscroll.AlphabetScrollRecyclerViewItemDecoration;
+import com.example.newdictionary.alphabetscroll.AlphabetScrollRecyclerViewAdapter;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class WordListFragment extends Fragment {
+public class DictionaryLookupFragment extends Fragment {
     private DictionaryFragmentsListener mListener;
     private RecyclerView recyclerView;
-    private MyWordRecyclerViewAdapter myWordRecyclerViewAdapter;
+    private AlphabetScrollRecyclerViewAdapter alphabetScrollRecyclerViewAdapter;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
      */
-    public WordListFragment() {
+    public DictionaryLookupFragment() {
     }
 
     @Override
@@ -49,11 +44,11 @@ public class WordListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_word_list, container, false);
-        myWordRecyclerViewAdapter = new MyWordRecyclerViewAdapter(mListener);
+        alphabetScrollRecyclerViewAdapter = new AlphabetScrollRecyclerViewAdapter(mListener);
         recyclerView = (RecyclerView) view.findViewById(R.id.list);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        recyclerView.setAdapter(myWordRecyclerViewAdapter);
-        recyclerView.addItemDecoration(new FastScrollRecyclerViewItemDecoration(getContext()));
+        recyclerView.setAdapter(alphabetScrollRecyclerViewAdapter);
+        recyclerView.addItemDecoration(new AlphabetScrollRecyclerViewItemDecoration(getContext()));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
         return view;

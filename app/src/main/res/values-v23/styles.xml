@@ -27,7 +27,6 @@
         <item name="android:colorBackground">@color/brightWhite</item>
         <!--item name="colorOnPrimary">@color/brightWhite</item-->
         <item name="android:windowLightStatusBar">@android:color/black</item>
-
         <!-- The color of the blinking cursor when in searchView -->
         <!--item name="colorAccent">@android:color/white</item-->
     </style>

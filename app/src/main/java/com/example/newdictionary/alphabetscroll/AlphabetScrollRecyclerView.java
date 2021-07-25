@@ -1,4 +1,4 @@
-package com.example.newdictionary.fastscroll;
+package com.example.newdictionary.alphabetscroll;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -11,13 +11,11 @@ import android.view.MotionEvent;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.newdictionary.R;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Set;
 
-public class FastScrollerRecyclerView extends RecyclerView {
+public class AlphabetScrollRecyclerView extends RecyclerView {
     private Context ctx;
 
     private boolean setupThings = false;
@@ -32,17 +30,17 @@ public class FastScrollerRecyclerView extends RecyclerView {
     public boolean showLetter = false;
     private Handler listHandler;
 
-    public FastScrollerRecyclerView(@NonNull Context context) {
+    public AlphabetScrollRecyclerView(@NonNull Context context) {
         super(context);
         ctx = context;
     }
 
-    public FastScrollerRecyclerView(Context context, AttributeSet attrs) {
+    public AlphabetScrollRecyclerView(Context context, AttributeSet attrs) {
         super(context, attrs);
         ctx = context;
     }
 
-    public FastScrollerRecyclerView(Context context, AttributeSet attrs, int defStyle) {
+    public AlphabetScrollRecyclerView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         ctx = context;
     }
@@ -58,7 +56,7 @@ public class FastScrollerRecyclerView extends RecyclerView {
     private void setupThings() {
         //Create az text data
         /* This gets the set letters corresponding to the beginnings of the various list sections i.e. A, B, C etc. */
-        Set<String> sectionSet = ((FastScrollerRecyclerViewInterface)getAdapter()).getMapIndex().keySet();
+        Set<String> sectionSet = ((AlphabetScrollRecyclerViewInterface)getAdapter()).getMapIndex().keySet();
 
         ArrayList<String> listSection = new ArrayList<>(sectionSet);
         Collections.sort(listSection);
@@ -118,11 +116,11 @@ public class FastScrollerRecyclerView extends RecyclerView {
                     showLetter = true;
                     int positionInData = 0;
 
-                    if (((FastScrollerRecyclerViewInterface)getAdapter()).getMapIndex().containsKey(section.toUpperCase())) {
-                        positionInData = ((FastScrollerRecyclerViewInterface) getAdapter()).getMapIndex().get(section.toUpperCase());
+                    if (((AlphabetScrollRecyclerViewInterface)getAdapter()).getMapIndex().containsKey(section.toUpperCase())) {
+                        positionInData = ((AlphabetScrollRecyclerViewInterface) getAdapter()).getMapIndex().get(section.toUpperCase());
                     }
                     this.scrollToPosition(positionInData);
-                    FastScrollerRecyclerView.this.invalidate();
+                    AlphabetScrollRecyclerView.this.invalidate();
                 }
                 break;
             }
@@ -138,10 +136,10 @@ public class FastScrollerRecyclerView extends RecyclerView {
                     section = sections[currentPosition];
                     showLetter = true;
                     int positionInData = 0;
-                    if(((FastScrollerRecyclerViewInterface)getAdapter()).getMapIndex().containsKey(section.toUpperCase()) )
-                        positionInData = ((FastScrollerRecyclerViewInterface)getAdapter()).getMapIndex().get(section.toUpperCase());
+                    if(((AlphabetScrollRecyclerViewInterface)getAdapter()).getMapIndex().containsKey(section.toUpperCase()) )
+                        positionInData = ((AlphabetScrollRecyclerViewInterface)getAdapter()).getMapIndex().get(section.toUpperCase());
                     this.scrollToPosition(positionInData);
-                    FastScrollerRecyclerView.this.invalidate();
+                    AlphabetScrollRecyclerView.this.invalidate();
                 }
                 break;
             }
@@ -163,7 +161,7 @@ public class FastScrollerRecyclerView extends RecyclerView {
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             showLetter = false;
-            FastScrollerRecyclerView.this.invalidate();
+            AlphabetScrollRecyclerView.this.invalidate();
         }
     }
 }

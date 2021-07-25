@@ -22,7 +22,7 @@
             app:tabBackground="?attr/colorPrimary"
             app:tabSelectedTextColor="@color/brightWhite"
             app:tabIndicatorColor="@color/brightWhite"
-            app:tabTextColor="?attr/android:textColorHint"
+            app:tabTextColor="?android:attr/textColorHint"
             app:tabIconTint="@color/brightWhite"
             app:tabGravity="fill">
 

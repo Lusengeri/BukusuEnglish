@@ -6,7 +6,7 @@
     android:id="@+id/helpLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".HelpAndFeedbackActivity$HelpFragment">
+    tools:context=".SettingsAndHelpActivity$HelpFragment">
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -37,6 +37,5 @@
                 app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
-
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

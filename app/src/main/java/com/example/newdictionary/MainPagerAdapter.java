@@ -5,6 +5,9 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
+import com.example.newdictionary.ui.main.DictionaryEntryFragment;
+import com.example.newdictionary.ui.main.DictionaryLookupFragment;
+
 
 public class MainPagerAdapter extends FragmentPagerAdapter {
 
@@ -25,9 +28,9 @@ public class MainPagerAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         switch (position) {
             case 0:
-                return new SearchResultFragment();
+                return new DictionaryEntryFragment();
             case 1:
-                return new WordListFragment();
+                return new DictionaryLookupFragment();
             default:
                 return null;
         }

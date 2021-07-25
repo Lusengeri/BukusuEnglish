@@ -24,17 +24,8 @@
         </activity>
 
         <activity
-            android:name=".HelpAndFeedbackActivity"
-            android:label="@string/title_activity_help_and_feedback"
-            android:parentActivityName=".MainActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
-        </activity>
-
-        <activity
-            android:name=".DisplaySettingsActivity"
-            android:label="@string/title_activity_settings"
+            android:name=".SettingsAndHelpActivity"
+            android:label="@string/title_activity_settings_and_help"
             android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

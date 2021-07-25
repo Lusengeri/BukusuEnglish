@@ -1,5 +1,7 @@
 package com.example.newdictionary;
 
+import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.text.Html;
 import android.view.LayoutInflater;
@@ -7,14 +9,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
+import androidx.preference.SwitchPreferenceCompat;
 
-public class HelpAndFeedbackActivity extends BaseActivity implements
+public class SettingsAndHelpActivity extends BaseActivity implements
         PreferenceFragmentCompat.OnPreferenceStartFragmentCallback {
 
     private static final String TITLE_TAG = "settingsActivityTitle";
@@ -41,12 +45,13 @@ public class HelpAndFeedbackActivity extends BaseActivity implements
                     @Override
                     public void onBackStackChanged() {
                         if (getSupportFragmentManager().getBackStackEntryCount() == 0) {
-                            setTitle(R.string.title_activity_help_and_feedback);
+                            setTitle(R.string.title_activity_settings_and_help);
                         }
                     }
                 });
 
         ActionBar actionBar = getSupportActionBar();
+
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
@@ -87,9 +92,39 @@ public class HelpAndFeedbackActivity extends BaseActivity implements
 
     public static class HeaderFragment extends PreferenceFragmentCompat {
 
+        private Activity activityCallback;
+
+        @Override
+        public void onAttach(@NonNull Context context) {
+            super.onAttach(context);
+            try {
+                activityCallback = (Activity) context;
+            } catch (ClassCastException e) {
+                throw new ClassCastException((context.toString() + "must be activity"));
+            }
+        }
+
         @Override
         public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
-            setPreferencesFromResource(R.xml.help_preferences, rootKey);
+            setPreferencesFromResource(R.xml.settings_help_preferences, rootKey);
+
+            SwitchPreferenceCompat themePreference = findPreference("theme");
+            themePreference.setOnPreferenceChangeListener(new SwitchPreferenceCompat.OnPreferenceChangeListener() {
+                @Override
+                public boolean onPreferenceChange(Preference preference, Object newValue) {
+                    boolean value = (boolean) newValue;
+
+                    if (!value) {
+                        //Set app theme to light-mode
+                        getPreferenceManager().getSharedPreferences().edit().putInt("Theme", R.style.CustomAppTheme).apply();
+                    } else {
+                        //Set app theme to dark-mode
+                        getPreferenceManager().getSharedPreferences().edit().putInt("Theme", R.style.CustomAppTheme2).apply();
+                    }
+                    activityCallback.recreate();
+                    return true;
+                }
+            });
         }
     }
 

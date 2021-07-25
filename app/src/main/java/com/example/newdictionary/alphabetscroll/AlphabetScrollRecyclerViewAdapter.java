@@ -1,4 +1,4 @@
-package com.example.newdictionary.fastscroll;
+package com.example.newdictionary.alphabetscroll;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -9,22 +9,20 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.newdictionary.DictionaryFragmentsListener;
+import com.example.newdictionary.ui.main.DictionaryFragmentsListener;
 import com.example.newdictionary.R;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
-import java.util.List;
 
-public class MyWordRecyclerViewAdapter extends RecyclerView.Adapter<MyWordRecyclerViewAdapter.ViewHolder>
-                                        implements FastScrollerRecyclerViewInterface {
+public class AlphabetScrollRecyclerViewAdapter extends RecyclerView.Adapter<AlphabetScrollRecyclerViewAdapter.ViewHolder>
+                                        implements AlphabetScrollRecyclerViewInterface {
     private final DictionaryFragmentsListener mListener;
     private HashMap<String, Integer> mMapIndex = new HashMap<>();
     private final Cursor wordList;
 
-    public MyWordRecyclerViewAdapter(DictionaryFragmentsListener listener) {
+    public AlphabetScrollRecyclerViewAdapter(DictionaryFragmentsListener listener) {
         mListener = listener;
         wordList = mListener.getWordList();
 

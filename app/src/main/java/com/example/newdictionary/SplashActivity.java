@@ -37,7 +37,6 @@ public class SplashActivity extends AppCompatActivity {
 
             }
         });
-
         imageView.startAnimation(animation);
     }
 }
