@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <PreferenceCategory
+        app:layout="@layout/preference_category_layout">
+        <Preference
+            app:layout="@layout/about_app_pane"/>
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        app:layout="@layout/preference_category_layout">
+        <Preference
+            app:title="Version 1.0"
+            app:layout="@layout/preference_option_layout"
+            app:icon="@drawable/serialization_128"/>
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        app:layout="@layout/preference_category_layout">
+        <Preference
+            app:title="Contact Us"
+            app:layout="@layout/preference_option_layout"
+            app:icon="@drawable/mail_100"/>
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        app:layout="@layout/preference_category_layout">
+        <Preference
+            app:title="Rate us on the Play Store"
+            app:layout="@layout/preference_option_layout"
+            app:icon="@drawable/playstore_100"/>
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        app:layout="@layout/preference_category_layout">
+        <Preference
+            app:title="Copyright © 2021 AL Software"
+            app:layout="@layout/preference_option_layout"
+            app:icon="@drawable/copyright_128"/>
+    </PreferenceCategory>
+
+</PreferenceScreen>

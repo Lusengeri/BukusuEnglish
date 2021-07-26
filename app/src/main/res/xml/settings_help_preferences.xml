@@ -21,7 +21,7 @@
             app:title="@string/help_menu_header"/>
 
         <Preference
-            app:icon="@drawable/mail_128"
+            app:icon="@drawable/mail_100"
             app:layout="@layout/preference_option_layout"
             app:title="@string/feedback_header"
             app:summary="Report technical issues or suggest new features"/>
@@ -32,7 +32,8 @@
         <Preference
             app:icon="@drawable/about_128"
             app:layout="@layout/preference_option_layout"
-            app:title="@string/about_header"/>
+            app:title="@string/about_header"
+            app:fragment="com.example.newdictionary.SettingsAndHelpActivity$AboutFragment"/>
     </PreferenceCategory>
 
 </PreferenceScreen>

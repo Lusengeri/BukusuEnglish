@@ -139,4 +139,11 @@ public class SettingsAndHelpActivity extends BaseActivity implements
             return view;
         }
     }
+
+    public static class AboutFragment extends PreferenceFragmentCompat {
+        @Override
+        public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
+            setPreferencesFromResource(R.xml.about_menu, rootKey);
+        }
+    }
 }

@@ -147,4 +147,5 @@ wh- (question) element
 	 ]]>
     </string>
     <string name="definition">DEFINITION</string>
+    <string name="app_description">The Bukusu-English dictionary is an app to lookup English definitnions of Bukusu words. It is intended to serve as an aid to language learners who know English but seek knowlege of the Bukusu language</string>
 </resources>
