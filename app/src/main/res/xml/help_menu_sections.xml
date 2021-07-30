@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <PreferenceCategory
+        app:title="Summary"
+        app:layout="@layout/help_menu_section_layout">
+        <Preference
+            app:title="@string/help_menu_summary_text"
+            app:layout="@layout/help_menu_content_layout"/>
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        app:title="Basic Features"
+        app:layout="@layout/help_menu_section_layout">
+        <Preference
+            app:title="@string/help_menu_basic_features_text"
+            app:layout="@layout/help_menu_content_layout"/>
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        app:title="Pronunciation &amp; Spelling"
+        app:layout="@layout/help_menu_section_layout">
+        <Preference
+            app:title="@string/help_menu_pronunciation_guide_text"
+            app:layout="@layout/help_menu_content_layout"/>
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        app:title="Abbreviations"
+        app:layout="@layout/help_menu_section_layout">
+        <Preference
+            app:title="@string/help_menu_abbreviations_text"
+            app:layout="@layout/help_menu_content_layout"/>
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        app:title="Settings"
+        app:layout="@layout/help_menu_section_layout">
+        <Preference
+            app:title="@string/help_menu_settings_text"
+            app:layout="@layout/help_menu_content_layout"/>
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        app:title="About"
+        app:layout="@layout/help_menu_section_layout">
+        <Preference
+            app:title="@string/help_menu_about_text"
+            app:layout="@layout/help_menu_content_layout"/>
+    </PreferenceCategory>
+
+</PreferenceScreen>

@@ -3,11 +3,6 @@ package com.example.newdictionary;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
-import android.text.Html;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
@@ -128,22 +123,18 @@ public class SettingsAndHelpActivity extends BaseActivity implements
         }
     }
 
-    public static class HelpFragment extends Fragment {
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                                 Bundle savedInstanceState) {
-            View view = inflater.inflate(R.layout.fragment_help_screen, container, false);
-            TextView textView = view.findViewById(R.id.helpText);
-            String helpText = getResources().getString(R.string.help_text);
-            textView.setText(Html.fromHtml(helpText));
-            return view;
-        }
-    }
-
     public static class AboutFragment extends PreferenceFragmentCompat {
         @Override
         public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
             setPreferencesFromResource(R.xml.about_menu, rootKey);
+        }
+    }
+
+    public static class HelpFragment extends PreferenceFragmentCompat {
+        @Override
+        public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
+            setPreferencesFromResource(R.xml.help_menu_sections, rootKey);
+
         }
     }
 }
