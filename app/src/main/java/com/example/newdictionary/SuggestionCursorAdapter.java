@@ -29,10 +29,14 @@ public class SuggestionCursorAdapter extends CursorAdapter {
         int currentTheme = PreferenceManager.getDefaultSharedPreferences(context)
                 .getInt("Theme", R.style.CustomAppTheme);
 
+        View dividingLine = view.findViewById(R.id.suggestDividingLine);
+
         if (currentTheme == R.style.CustomAppTheme) {
             textView.setTextColor(context.getResources().getColor(R.color.primaryLight));
+            dividingLine.setBackgroundColor(context.getResources().getColor(R.color.lightGrey));
         } else {
             textView.setTextColor(context.getResources().getColor(R.color.secondaryDark));
+            dividingLine.setBackgroundColor(context.getResources().getColor(R.color.primaryDark));
         }
         textView.setText(cursor.getString(1));
     }

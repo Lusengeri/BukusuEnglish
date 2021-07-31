@@ -7,6 +7,14 @@
         android:id="@+id/suggestView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="15sp"
-        android:textSize="20sp" />
+        android:layout_margin="8sp"
+        android:paddingLeft="20dp"
+        android:textSize="18sp"/>
+
+    <View
+        android:id="@+id/suggestDividingLine"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"/>
 </LinearLayout>

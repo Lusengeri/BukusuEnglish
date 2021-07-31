@@ -71,24 +71,8 @@ public class AlphabetScrollRecyclerView extends RecyclerView {
         scaledWidth = indWidth * ctx.getResources().getDisplayMetrics().density;
         scaledHeight = indHeight * ctx.getResources().getDisplayMetrics().density;
         /* The following establishes the position of the 'Index Bar' to the left of the (rhs) scroll bar */
-        sx = this.getWidth() - this.getPaddingRight() - (float)(3 * scaledWidth);
+        sx = this.getWidth() - this.getPaddingRight() + (this.getPaddingRight()/2) - (scaledWidth/2);
         sy = (float) ((this.getHeight() - (scaledHeight * sections.length)) / 2.0);
-        Log.i("info", "density: " + ctx.getResources().getDisplayMetrics().density);
-        Log.i("info", "densityDpi: " + ctx.getResources().getDisplayMetrics().densityDpi);
-        Log.i("info", "scaledWidth: " + scaledWidth);
-        Log.i("info", "scaledHeight: " + scaledHeight);
-        Log.i("info", "this.getWidth(): " + this.getWidth());
-        Log.i("info", "this.getPaddingRight(): " + this.getPaddingRight());
-        Log.i("info", "this.getHeight(): " + this.getHeight());
-        Log.i("info", "this.getMeasuredHeight(): " + this.getMeasuredHeight());
-        Log.i("info", "this.getMeasuredHeightAndState(): " + this.getMeasuredHeightAndState());
-        Log.i("info", "this.getMinimumHeight(): " + this.getMinimumHeight());
-        Log.i("info", "sections.length: " + sections.length);
-        Log.i("info", "heightPixels: " + ctx.getResources().getDisplayMetrics().heightPixels);
-        Log.i("info", "this.getTop(): " + this.getTop());
-        Log.i("info", "this.getBottom(): " + this.getBottom());
-        Log.i("info", "sx: " + sx);
-        Log.i("info", "sy: " + sy);
         setupThings = true;
     }
 
