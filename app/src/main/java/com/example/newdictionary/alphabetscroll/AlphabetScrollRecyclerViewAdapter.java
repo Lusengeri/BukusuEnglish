@@ -1,9 +1,12 @@
 package com.example.newdictionary.alphabetscroll;
 
 import androidx.annotation.NonNull;
+import androidx.preference.PreferenceManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.database.Cursor;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,22 +24,24 @@ public class AlphabetScrollRecyclerViewAdapter extends RecyclerView.Adapter<Alph
     private final DictionaryFragmentsListener mListener;
     private HashMap<String, Integer> mMapIndex = new HashMap<>();
     private final Cursor wordList;
+    private Context ctx;
+    private ArrayList<String> wordArrayList = new ArrayList<>();
 
-    public AlphabetScrollRecyclerViewAdapter(DictionaryFragmentsListener listener) {
+    public AlphabetScrollRecyclerViewAdapter(DictionaryFragmentsListener listener, Context context) {
         mListener = listener;
+        ctx = context;
         wordList = mListener.getWordList();
 
-        ArrayList<String> wordArrayList = new ArrayList<>();
+        //ArrayList<String> wordArrayList = new ArrayList<>();
         while ( wordList.moveToNext()) {
             wordArrayList.add(wordList.getString(0));
         }
         mMapIndex = calculateIndexesForName(wordArrayList);
     }
 
-
     private HashMap<String, Integer> calculateIndexesForName(ArrayList<String> items) {
         HashMap<String, Integer> mapIndex = new LinkedHashMap<>();
-        for (int i = 0; i<items.size(); i++){
+        for (int i = 0; i<items.size(); i++) {
             String name = items.get(i);
             String index = name.substring(0,1);
 
@@ -67,22 +72,48 @@ public class AlphabetScrollRecyclerViewAdapter extends RecyclerView.Adapter<Alph
         wordList.moveToPosition(position);
         String word = wordList.getString(0);
         holder.wordView.setText(word);
+
+        int currentTheme = PreferenceManager.getDefaultSharedPreferences(ctx)
+                .getInt("Theme", R.style.CustomAppTheme);
+
+        if (word.equals("aundi")) {
+            Log.i("info", "*** I've seen you my word ...");
+            Log.i("info", "The 'current word' is: " + mListener.getCurrentWord());
+        }
+
+        if (word.equals(mListener.getCurrentWord())) {
+            if (currentTheme == R.style.CustomAppTheme) {
+                holder.wordView.setBackgroundColor(ctx.getResources().getColor(R.color.hintColorLight));
+            } else {
+                holder.wordView.setBackgroundColor(ctx.getResources().getColor(R.color.primaryDark));
+            }
+        } else {
+            if (currentTheme == R.style.CustomAppTheme) {
+                holder.wordView.setBackgroundColor(ctx.getResources().getColor(R.color.brightWhite));
+            } else {
+                holder.wordView.setBackgroundColor(ctx.getResources().getColor(R.color.surfaceDark));
+            }
+        }
+
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (null != mListener) {
                     mListener.onListFragmentInteraction(holder.wordView.getText().toString());
+                    notifyDataSetChanged();
                 }
             }
         });
+    }
+
+    public int getIndexOf(String word) {
+        return wordArrayList.indexOf(word);
     }
 
     @Override
     public HashMap<String, Integer> getMapIndex() {
         return mMapIndex;
     }
-
-
 
     @Override
     public int getItemCount() {

@@ -15,6 +15,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.example.newdictionary.database.DictEntry;
 import com.example.newdictionary.ui.main.DictionaryFragmentsListener;
 import com.example.newdictionary.ui.main.MainViewModel;
 import com.google.android.material.tabs.TabLayout;
@@ -23,6 +24,7 @@ public class MainActivity extends BaseActivity  implements DictionaryFragmentsLi
     private SearchView wordSearchView;
     private ViewPager viewPager;
     public MainViewModel mainViewModel;
+    private String currentWord;
 
     public MainViewModel getMainViewModel() {
         return mainViewModel;
@@ -36,6 +38,8 @@ public class MainActivity extends BaseActivity  implements DictionaryFragmentsLi
         Toolbar toolbar = findViewById(R.id.mainToolbar);
         setSupportActionBar(toolbar);
 
+        currentWord = getPreferences(MainActivity.MODE_PRIVATE).getString("word", null);
+
         configureDataSources();
         configureTabLayout();
     }
@@ -43,6 +47,16 @@ public class MainActivity extends BaseActivity  implements DictionaryFragmentsLi
     private void configureDataSources() {
         SavedStateViewModelFactory factory = new SavedStateViewModelFactory(getApplication(),this);
         mainViewModel = new ViewModelProvider(this, factory).get(MainViewModel.class);
+
+        Observer<DictEntry> currentWordObserver = new Observer<DictEntry>() {
+            @Override
+            public void onChanged(DictEntry dictEntry) {
+                if (!dictEntry.getUnaccented().equals("")) {
+                    currentWord = dictEntry.getUnaccented();
+                }
+            }
+        };
+        mainViewModel.getCurrentWord().observe(this, currentWordObserver);
     }
 
     private void configureTabLayout() {
@@ -153,5 +167,10 @@ public class MainActivity extends BaseActivity  implements DictionaryFragmentsLi
     @Override
     public Cursor getWordList() {
         return mainViewModel.getWordList();
+    }
+
+    @Override
+    public String getCurrentWord() {
+        return currentWord;
     }
 }

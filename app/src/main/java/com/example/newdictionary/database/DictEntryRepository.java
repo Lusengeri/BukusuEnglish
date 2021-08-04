@@ -50,11 +50,13 @@ public class DictEntryRepository {
         if (!results.isEmpty()) {
             currentWord.setValue(results.get(0));
         } else {
-            currentWord.setValue(null);
+            DictEntry blankWord = new DictEntry();
+            blankWord.blankAll();
+            currentWord.setValue(blankWord);
         }
     }
 
-    public LiveData<DictEntry> getCurrentWord() {
+    public MutableLiveData<DictEntry> getCurrentWord() {
         return currentWord;
     }
 

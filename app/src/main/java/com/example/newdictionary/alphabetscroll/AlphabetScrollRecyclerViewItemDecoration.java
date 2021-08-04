@@ -5,6 +5,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 
+import androidx.annotation.NonNull;
 import androidx.preference.PreferenceManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -16,6 +17,8 @@ public class AlphabetScrollRecyclerViewItemDecoration extends RecyclerView.ItemD
         mContext = context;
     }
 
+
+
     @Override
     public void onDrawOver(Canvas canvas, RecyclerView parent, RecyclerView.State state) {
         super.onDrawOver(canvas, parent, state);
@@ -23,7 +26,8 @@ public class AlphabetScrollRecyclerViewItemDecoration extends RecyclerView.ItemD
         float scaledWidth = ((AlphabetScrollRecyclerView)parent).scaledWidth;
         float sx = ((AlphabetScrollRecyclerView) parent).sx;
         float scaledHeight= ((AlphabetScrollRecyclerView) parent).scaledHeight;
-        float sy = ((AlphabetScrollRecyclerView) parent).sy;
+        //float sy = ((AlphabetScrollRecyclerView) parent).sy;
+        float sy = (float) ((parent.getHeight() - (scaledHeight * ((AlphabetScrollRecyclerView)(parent)).sections.length)) / 2.0);
         String[] sections = ((AlphabetScrollRecyclerView) parent).sections;
         String section = ((AlphabetScrollRecyclerView) parent).section;
         boolean showLetter = ((AlphabetScrollRecyclerView) parent).showLetter;

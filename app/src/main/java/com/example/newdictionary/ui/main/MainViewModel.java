@@ -5,13 +5,14 @@ import android.database.Cursor;
 
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 
 import com.example.newdictionary.database.DictEntry;
 import com.example.newdictionary.database.DictEntryRepository;
 
 public class MainViewModel extends AndroidViewModel {
     private DictEntryRepository repository;
-    public LiveData<DictEntry> currentWord;
+    public MutableLiveData<DictEntry> currentWord;
     public LiveData<Cursor> suggestionsList;
     public Cursor wordList;
 

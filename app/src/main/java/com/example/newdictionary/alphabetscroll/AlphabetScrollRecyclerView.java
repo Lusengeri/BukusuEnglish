@@ -50,6 +50,7 @@ public class AlphabetScrollRecyclerView extends RecyclerView {
         if (!setupThings) {
             setupThings();
         }
+
         super.onDraw(c);
     }
 
@@ -99,11 +100,14 @@ public class AlphabetScrollRecyclerView extends RecyclerView {
                     section = sections[currentPosition];
                     showLetter = true;
                     int positionInData = 0;
+                    int itemCount = 0;
 
                     if (((AlphabetScrollRecyclerViewInterface)getAdapter()).getMapIndex().containsKey(section.toUpperCase())) {
                         positionInData = ((AlphabetScrollRecyclerViewInterface) getAdapter()).getMapIndex().get(section.toUpperCase());
+                        itemCount = getAdapter().getItemCount();
                     }
-                    this.scrollToPosition(positionInData);
+                    this.scrollToPosition(positionInData+10);
+                    //this.findViewHolderForAdapterPosition(positionInData);
                     AlphabetScrollRecyclerView.this.invalidate();
                 }
                 break;
@@ -135,7 +139,6 @@ public class AlphabetScrollRecyclerView extends RecyclerView {
                 else
                     return true;
             }
-
         }
         return true;
     }

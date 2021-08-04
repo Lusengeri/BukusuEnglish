@@ -63,4 +63,11 @@ public class DictEntry {
     public String getUnaccented() {
         return unaccented;
     }
+
+    public void blankAll() {
+        setWord("");
+        setPos("");
+        setUnaccented("");
+        setDefinition("");
+    }
 }

@@ -9,6 +9,37 @@
     android:orientation="vertical"
     tools:context=".ui.main.DictionaryEntryFragment">
 
+    <TextView
+        android:id="@+id/posView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginTop="64dp"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textColor="?android:attr/textColor"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/wordView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="64dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginRight="30dp"
+        android:shadowColor="#000000"
+        android:singleLine="false"
+        android:textColor="?android:attr/textColor"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/posView"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <View
         android:id="@+id/dividingLine"
         android:layout_width="match_parent"
@@ -22,25 +53,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/wordView" />
-
-    <TextView
-        android:id="@+id/wordView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginLeft="24dp"
-        android:layout_marginTop="64dp"
-        android:layout_marginEnd="30dp"
-        android:layout_marginRight="30dp"
-        android:shadowColor="#000000"
-        android:singleLine="false"
-        android:textColor="?android:attr/textColor"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/pronunciationView"
