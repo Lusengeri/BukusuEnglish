@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
@@ -148,6 +147,15 @@ public class SettingsAndHelpActivity extends BaseActivity implements
                     return false;
                 }
             });
+
+            Preference rate_link = findPreference("rate_link");
+            rate_link.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+                @Override
+                public boolean onPreferenceClick(Preference preference) {
+                    startActivity(SettingsAndHelpActivity.getAppStoreRatingIntent());
+                    return false;
+                }
+            });
         }
     }
 
@@ -162,8 +170,22 @@ public class SettingsAndHelpActivity extends BaseActivity implements
         Intent emailIntent = new Intent(Intent.ACTION_SEND);
         emailIntent.setData(Uri.parse("mailto:"));
         emailIntent.setType("text/plain");
-        emailIntent.putExtra(Intent.EXTRA_EMAIL, new String[] {"al.software.engineering@gmail.com"});
+        emailIntent.putExtra(Intent.EXTRA_EMAIL, new String[]{"al.software.engineering@gmail.com"});
         emailIntent.putExtra(Intent.EXTRA_SUBJECT, "RE: BUKUSU-ENGLISH DICTIONARY - USER FEEDBACK");
         return emailIntent;
+    }
+
+    public static Intent getAppStoreRatingIntent() {
+        Uri uri = Uri.parse("market://details?id=$packageName");
+        Intent rateIntent = new Intent(Intent.ACTION_VIEW, uri);
+        return rateIntent;
+    }
+
+    public static Intent getAppShareIntent() {
+        Intent shareIntent = new Intent(Intent.ACTION_SEND);
+        shareIntent.putExtra(Intent.EXTRA_SUBJECT,"Bukusu-English Dictionary");
+        shareIntent.putExtra(Intent.EXTRA_TEXT,"https://play.google.com/store/apps/details?id=$packageName");
+        shareIntent.setType("text/plain");
+        return shareIntent;
     }
 }

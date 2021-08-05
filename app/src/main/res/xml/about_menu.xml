@@ -28,6 +28,7 @@
     <PreferenceCategory
         app:layout="@layout/preference_category_layout">
         <Preference
+            app:key="rate_link"
             app:title="Rate us on the Play Store"
             app:layout="@layout/preference_option_layout"
             app:icon="@drawable/playstore_100"/>

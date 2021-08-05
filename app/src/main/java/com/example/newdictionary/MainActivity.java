@@ -155,6 +155,12 @@ public class MainActivity extends BaseActivity  implements DictionaryFragmentsLi
                 editor.commit();
                 startActivity(settings_and_help_intent);
                 return true;
+            case (R.id.action_rate_app):
+                startActivity(SettingsAndHelpActivity.getAppStoreRatingIntent());
+                return true;
+            case (R.id.action_invite):
+                startActivity(SettingsAndHelpActivity.getAppShareIntent());
+                return true;
             default:
                 return super.onOptionsItemSelected(menuItem);
         }
