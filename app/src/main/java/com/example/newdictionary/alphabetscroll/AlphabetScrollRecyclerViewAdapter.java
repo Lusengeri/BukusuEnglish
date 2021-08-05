@@ -83,15 +83,19 @@ public class AlphabetScrollRecyclerViewAdapter extends RecyclerView.Adapter<Alph
 
         if (word.equals(mListener.getCurrentWord())) {
             if (currentTheme == R.style.CustomAppTheme) {
-                holder.wordView.setBackgroundColor(ctx.getResources().getColor(R.color.hintColorLight));
+                holder.wordView.setBackgroundColor(ctx.getResources().getColor(R.color.primaryLight));
+                holder.wordView.setTextColor(ctx.getResources().getColor(R.color.brightWhite));
             } else {
-                holder.wordView.setBackgroundColor(ctx.getResources().getColor(R.color.primaryDark));
+                holder.wordView.setBackgroundColor(ctx.getResources().getColor(R.color.brightWhite));
+                holder.wordView.setTextColor(ctx.getResources().getColor(R.color.primaryDark));
             }
         } else {
             if (currentTheme == R.style.CustomAppTheme) {
                 holder.wordView.setBackgroundColor(ctx.getResources().getColor(R.color.brightWhite));
+                holder.wordView.setTextColor(ctx.getResources().getColor(R.color.primaryLight));
             } else {
                 holder.wordView.setBackgroundColor(ctx.getResources().getColor(R.color.surfaceDark));
+                holder.wordView.setTextColor(ctx.getResources().getColor(R.color.brightWhite));
             }
         }
 

@@ -17,8 +17,6 @@ public class AlphabetScrollRecyclerViewItemDecoration extends RecyclerView.ItemD
         mContext = context;
     }
 
-
-
     @Override
     public void onDrawOver(Canvas canvas, RecyclerView parent, RecyclerView.State state) {
         super.onDrawOver(canvas, parent, state);
@@ -68,7 +66,7 @@ public class AlphabetScrollRecyclerViewItemDecoration extends RecyclerView.ItemD
         textPaint.setStyle(Paint.Style.FILL);
 
         for (int i = 0; i < sections.length; i++) {
-            if(showLetter & section != null && !section.equals("") && section!=null
+            if(showLetter && section != null && !section.equals("") && section!=null
                     && sections[i].toUpperCase().equals(section.toUpperCase())) {
 
                 if (currentTheme == R.style.CustomAppTheme) {
