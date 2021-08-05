@@ -93,12 +93,14 @@ public class MainActivity extends BaseActivity  implements DictionaryFragmentsLi
         wordSearchView.setIconifiedByDefault(true);
         wordSearchView.setSubmitButtonEnabled(true);
         wordSearchView.setQueryHint("Search for a word");
-        wordSearchView.setSuggestionsAdapter(new SuggestionCursorAdapter(getApplication(),null, true));
+        wordSearchView.setSuggestionsAdapter(new SuggestionCursorAdapter(getApplicationContext(), null, false));
 
         Observer<Cursor> suggestionObserver = new Observer<Cursor>() {
             @Override
             public void onChanged(Cursor suggestions) {
-                wordSearchView.getSuggestionsAdapter().swapCursor(suggestions);
+                if (!suggestions.isClosed()) {
+                    wordSearchView.getSuggestionsAdapter().swapCursor(suggestions);
+                }
             }
         };
         mainViewModel.getSuggestionsList().observe(this, suggestionObserver);

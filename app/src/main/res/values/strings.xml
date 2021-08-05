@@ -66,5 +66,6 @@ In general, &#39;ny&#39; should represent the palatal nasal [ñ], although there
     <string name="help_menu_about_text">
 "The team responsible for developing this app is constantly looking for collaborators and contributors to help make the dictionary better."
     </string>
+    <string name="colon">:</string>
 
 </resources>

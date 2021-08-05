@@ -9,7 +9,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,13 +17,15 @@ import android.widget.TextView;
 import com.example.newdictionary.MainActivity;
 import com.example.newdictionary.R;
 import com.example.newdictionary.database.DictEntry;
-import com.example.newdictionary.ui.main.MainViewModel;
 
 public class DictionaryEntryFragment extends Fragment {
     private TextView posView;
+    private TextView colonView;
     private TextView wordView;
     private TextView pronunciationView;
+    private TextView definitionNum;
     private TextView definitionView;
+    private TextView messageView;
     private View dividingLine;
 
     private MainActivity parentActivity;
@@ -49,10 +50,13 @@ public class DictionaryEntryFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_search_result, container, false);
         posView = view.findViewById(R.id.posView);
+        colonView = view.findViewById(R.id.colonView);
         wordView = view.findViewById(R.id.wordView);
         pronunciationView = view.findViewById(R.id.pronunciationView);
+        definitionNum = view.findViewById(R.id.definitionNum);
         definitionView = view.findViewById(R.id.definitionView);
         dividingLine = view.findViewById(R.id.dividingLine);
+        messageView = view.findViewById(R.id.messageView);
         setDefaultDefinitionText();
         return view;
     }
@@ -67,7 +71,7 @@ public class DictionaryEntryFragment extends Fragment {
             public void onChanged(DictEntry dictEntry) {
                 if (dictEntry.getUnaccented().equals("") || dictEntry.getDefinition().equals("")
                     || dictEntry.getPos().equals("") || dictEntry.getWord().equals("")) {
-                    showUnsuccessful();
+                    showUnsuccessful(getResources().getString(R.string.word_not_found_placeholder));
                 } else {
                     showSelectedDefinition(dictEntry.getWord(), dictEntry.getPos(), dictEntry.getDefinition(),
                             dictEntry.getUnaccented());
@@ -79,18 +83,22 @@ public class DictionaryEntryFragment extends Fragment {
 
     public void showSelectedDefinition(String word, String pos, String definition, String unaccented) {
         posView.setVisibility(View.VISIBLE);
+        colonView.setVisibility(View.VISIBLE);
         wordView.setVisibility(View.VISIBLE);
         pronunciationView.setVisibility(View.VISIBLE);
+        definitionNum.setVisibility(View.VISIBLE);
         definitionView.setVisibility(View.VISIBLE);
         dividingLine.setVisibility(View.VISIBLE);
+        messageView.setVisibility(View.INVISIBLE);
 
         if (word.equals(null)) {
             setDefaultDefinitionText();
         } else {
-            posView.setText(pos+":");
+            posView.setText(pos);
             wordView.setText(unaccented);
             pronunciationView.setText("|" + word + "|");
-            definitionView.setText("1. " + definition);
+            definitionNum.setText("1.");
+            definitionView.setText(definition);
 
             SharedPreferences.Editor editor = parentActivity.getPreferences(MainActivity.MODE_PRIVATE).edit();
             editor.putString("pos", posView.getText().toString());
@@ -108,21 +116,27 @@ public class DictionaryEntryFragment extends Fragment {
         String prev_pron = preferences.getString("pron", "");
         String prev_definition = preferences.getString("definition", "");
 
-        if (prev_word == null) {
-            wordView.setText(getResources().getString(R.string.default_view_text));
+        if (prev_word == "") {
+            showUnsuccessful(getResources().getString(R.string.default_view_text));
         } else {
-            posView.setText(prev_pos+":");
+            posView.setText(prev_pos);
             wordView.setText(prev_word);
             pronunciationView.setText(prev_pron);
+            definitionNum.setText("1.");
             definitionView.setText(prev_definition);
         }
     }
 
-    public void showUnsuccessful(){
+    public void showUnsuccessful(String message) {
         posView.setVisibility(View.INVISIBLE);
-        wordView.setText(getResources().getString(R.string.word_not_found_placeholder));
+        colonView.setVisibility(View.INVISIBLE);
+        wordView.setVisibility(View.INVISIBLE);
         pronunciationView.setVisibility(View.INVISIBLE);
+        definitionNum.setVisibility(View.INVISIBLE);
         definitionView.setVisibility(View.INVISIBLE);
         dividingLine.setVisibility(View.INVISIBLE);
+
+        messageView.setVisibility(View.VISIBLE);
+        messageView.setText(message);
     }
 }
