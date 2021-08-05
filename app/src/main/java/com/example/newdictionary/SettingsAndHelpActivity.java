@@ -2,7 +2,10 @@ package com.example.newdictionary;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
@@ -120,6 +123,15 @@ public class SettingsAndHelpActivity extends BaseActivity implements
                     return true;
                 }
             });
+
+            Preference feedback_link = findPreference("feedback_link");
+            feedback_link.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+                @Override
+                public boolean onPreferenceClick(Preference preference) {
+                    startActivity(SettingsAndHelpActivity.getEmailIntent());
+                    return false;
+                }
+            });
         }
     }
 
@@ -127,6 +139,15 @@ public class SettingsAndHelpActivity extends BaseActivity implements
         @Override
         public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
             setPreferencesFromResource(R.xml.about_menu, rootKey);
+
+            Preference feedback_link = findPreference("feedback_link");
+            feedback_link.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+                @Override
+                public boolean onPreferenceClick(Preference preference) {
+                    startActivity(SettingsAndHelpActivity.getEmailIntent());
+                    return false;
+                }
+            });
         }
     }
 
@@ -134,7 +155,15 @@ public class SettingsAndHelpActivity extends BaseActivity implements
         @Override
         public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
             setPreferencesFromResource(R.xml.help_menu_sections, rootKey);
-
         }
+    }
+
+    private static Intent getEmailIntent() {
+        Intent emailIntent = new Intent(Intent.ACTION_SEND);
+        emailIntent.setData(Uri.parse("mailto:"));
+        emailIntent.setType("text/plain");
+        emailIntent.putExtra(Intent.EXTRA_EMAIL, new String[] {"al.software.engineering@gmail.com"});
+        emailIntent.putExtra(Intent.EXTRA_SUBJECT, "RE: BUKUSU-ENGLISH DICTIONARY - USER FEEDBACK");
+        return emailIntent;
     }
 }

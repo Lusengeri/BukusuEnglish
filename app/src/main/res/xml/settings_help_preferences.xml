@@ -21,6 +21,7 @@
             app:title="@string/help_menu_header"/>
 
         <Preference
+            app:key="feedback_link"
             app:icon="@drawable/mail_100"
             app:layout="@layout/preference_option_layout"
             app:title="@string/feedback_header"

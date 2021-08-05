@@ -19,6 +19,7 @@
     <PreferenceCategory
         app:layout="@layout/preference_category_layout">
         <Preference
+            app:key="feedback_link"
             app:title="Contact Us"
             app:layout="@layout/preference_option_layout"
             app:icon="@drawable/mail_100"/>
