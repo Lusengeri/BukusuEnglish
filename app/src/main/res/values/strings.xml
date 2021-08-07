@@ -5,7 +5,7 @@
     <string name="settings_and_help_menu_option_string">Settings &amp; Help</string>
     <string name="rate_option_string">Rate the App</string>
     <string name="invitation_option_string">Invite Friends</string>
-    <string name="default_view_text">Search for or look-up a Lubukusu word to view its definition in English</string>
+    <string name="default_view_text">Search for or look-up a Bukusu word to view its definition in English</string>
     <string name="word_not_found_placeholder">Word not found. Recheck spelling or look-up instead.</string>
     <string name="help_menu_header">App usage and general info.</string>
     <string name="feedback_header"> Contact Us</string>
@@ -14,57 +14,96 @@
     <string name="title_activity_settings_and_help">Settings &amp; Help</string>
     <string name="title_activity_settings">Display Settings</string>
     <string name="definition">DEFINITION</string>
-    <string name="app_description">The Bukusu-English dictionary is an app to lookup English definitnions of Bukusu words. It is intended to serve as an aid to language learners who know English but seek knowlege of the Bukusu language</string>
+    <string name="app_description">The Bukusu-English dictionary is an Android app to lookup English definitions of Bukusu words. It is intended to serve as an aid to language learners who know English but who seek to improve their knowlege of the Bukusu language. At least a rudimentary grasp of Bukusu is assumed.</string>
 
-    <string name="help_menu_summary_text">The Lubukusu-English dictionary app is based on the draft of the &#34;Bukusu-English Dictionary&#34;
-	 compiled and edited by Michael Marlo, Adrian Sifuna, Aggrey Wasike (2008).</string>
+    <string name="help_menu_summary_text">
+"
+The Bukusu-English Dictionary app is largely based on the draft of the &#39;Bukusu-English Dictionary&#39; compiled and edited by Michael Marlo, Adrian Sifuna, Aggrey Wasike (2008).
+
+Efforts are underway to expand upon this base and further contributions by Bukusu language experts and native speakers are encouraged. (Kindly tap on the &#39;Contact Us&#39; link in the &#39;Help &amp; Settings&#39; menu to get in touch with the app developers in this regard.)"
+    </string>
 
     <string name="help_menu_basic_features_text">
-"The app allows the user to search for a word on the top tab or to lookup a word on the
-alphabetically ordered list of all the words."
+"
+The current version of the application allows a user to search for a word from the search box within the action bar at the top of the screen.
+
+Suggestions corresponding to the current search term appear as a scrollable drop-down list with individually clickable/selectable words.
+
+It is also possible to lookup a specific word on the alphabetically ordered list of all available words in the &#39;LOOKUP&#39; tab on the main application screen.
+
+Upon performing a successful search or lookup, the definition of the required word is displayed on the &#39;DEFINITION&#39; tab.
+
+Searching for words not contained in the dictionary will result in a message communicating an unsuccessful search being displayed on the main screen."
     </string>
 
     <string name="help_menu_pronunciation_guide_text">
-"The dictionary retains all the tone marking of the original source but also includes the spelling of words as commonly spelled/used.
+"
+The words are primarily displayed and searchable in the Bukusu orthography in common use. Also included are the transcriptions from the original source complete with tone marking in which:
 
-In the present transcription system, long vowels are marked as a sequence of two vowels, e.g.,[aa]. A syllable boundary between two vowels is marked by &#39;.&#39;. High-tone is marked with an acute accent. Low-tone is unmarked, &#39;b&#39; represents [b] after a nasal and [β] elsewhere, &#39;ch&#39; represents [č], &#39;sh&#39; represents [š], &#39;kh&#39; represents [x], &#39;ng&#39;&#39; (&#39;ng&#39; followed by an apostrophe) represents [ŋ], &#39;nj&#39; represents [ñǰ], and &#39;ng&#39; represents [ŋg].
+long vowels are marked as a sequence of two vowels, e.g.,[aa],
+
+a syllable boundary between two vowels is marked by &#39;.&#39;,
+
+high-tone is marked with an acute accent,
+
+low-tone is unmarked,
+
+&#39;b&#39; represents [b] after a nasal and [β] elsewhere,
+
+&#39;ch&#39; represents [č],
+
+&#39;sh&#39; represents [š],
+
+&#39;kh&#39; represents [x],
+
+&#39;ng&#39;&#39; (&#39;ng&#39; followed by an apostrophe) represents [ŋ],
+
+&#39;nj&#39; represents [ñǰ], and &#39;ng&#39; represents [ŋg].
 
 In general, &#39;ny&#39; should represent the palatal nasal [ñ], although there may be cases where the same orthographic sequence represents the sequence of a coronal nasal followed by a palatal glide, i.e., [ny]."
     </string>
     <string name="help_menu_abbreviations_text">
-"The following abbreviations are used to mark parts of speech:
+"
+The following abbreviations are used to mark parts of speech:
+
         &#39;adj&#39;               - adjective
         &#39;adv&#39;              - adverb
         &#39;comp&#39;          - complement
-        &#39;conj&#39; 			- conjunction
-        &#39;dem&#39; 			- demonstrative
-        &#39;excl&#39; 			- exclamation
-        &#39;ideo&#39; 			- ideophone
-        &#39;loc&#39; 			- locative
-        &#39;n&#39; 			- noun
-        &#39;neg&#39; 			- negation element
-        &#39;np&#39; 			- noun phrase
-        &#39;num&#39; 			- numeral
-        &#39;poss&#39; 			- possessive pronoun
-        &#39;pp&#39; 			- prepositional phrase
-        &#39;prep&#39; 			- preposition
-        &#39;pron&#39; 			- pronoun
-        &#39;quan&#39; 			- quantifier
-        &#39;relcl&#39; 		- relative clause
-        &#39;s&#39; 			- sentence
-        &#39;v&#39; 			- verb
-        &#39;vint&#39; 			- intransitive verb
-        &#39;vrefl&#39; 		- reflexivized verb
-        &#39;vpass&#39; 		- passivized verb
-        &#39;vtr&#39; 			- transitive verb
-        &#39;vp&#39; 			- verb phrase
-        &#39;wh&#39; 			- wh- (question) element"
+        &#39;conj&#39; 			     - conjunction
+        &#39;dem&#39; 			     - demonstrative
+        &#39;excl&#39; 			       - exclamation
+        &#39;ideo&#39; 			     - ideophone
+        &#39;loc&#39; 			       - locative
+        &#39;n&#39; 			           - noun
+        &#39;neg&#39; 			       - negation element
+        &#39;np&#39; 			         - noun phrase
+        &#39;num&#39; 			     - numeral
+        &#39;poss&#39; 			     - possessive pronoun
+        &#39;pp&#39; 			         - prepositional phrase
+        &#39;prep&#39; 			     - preposition
+        &#39;pron&#39; 			     - pronoun
+        &#39;quan&#39; 			    - quantifier
+        &#39;relcl&#39; 		       - relative clause
+        &#39;s&#39; 			           - sentence
+        &#39;v&#39; 			           - verb
+        &#39;vint&#39; 			       - intransitive verb
+        &#39;vrefl&#39; 		       - reflexivized verb
+        &#39;vpass&#39; 		     - passivized verb
+        &#39;vtr&#39; 			         - transitive verb
+        &#39;vp&#39; 			         - verb phrase
+        &#39;wh&#39; 			         - wh- (question) element"
     </string>
     <string name="help_menu_settings_text">
-"On the settings menu the user is able to adjust the app theme between the normal mode (light) and the dark mode as per their preference."
+"
+On the settings menu the user is able to adjust the app theme between the normal mode (light) and the dark mode as per their preference."
     </string>
     <string name="help_menu_about_text">
-"The team responsible for developing this app is constantly looking for collaborators and contributors to help make the dictionary better."
+"
+The Bukusu-English Dictionary app is the result of volunteer effort.
+
+As such, the team responsible for developing this app is constantly looking for collaborators and contributors to help make the dictionary better.
+
+Kindly tap on the &#39;Contact Us&#39; link in the &#39;Help &amp; Settings&#39; menu to get in touch with the app developers and contribute new words, alternate definitions and usage examples."
     </string>
     <string name="colon">:</string>
 
