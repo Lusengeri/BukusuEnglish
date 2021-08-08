@@ -12,9 +12,9 @@ import com.example.newdictionary.database.DictEntryRepository;
 
 public class MainViewModel extends AndroidViewModel {
     private DictEntryRepository repository;
-    public MutableLiveData<DictEntry> currentWord;
-    public LiveData<Cursor> suggestionsList;
-    public Cursor wordList;
+    private MutableLiveData<DictEntry> currentWord;
+    private MutableLiveData<Cursor> suggestionsList;
+    private Cursor wordList;
 
     public MainViewModel(Application application) {
         super(application);
@@ -41,6 +41,6 @@ public class MainViewModel extends AndroidViewModel {
     }
 
     public void searchForSuggestions(String query) {
-        repository.searchForSuggestions(query + "%");
+            repository.searchForSuggestions(query);
     }
 }

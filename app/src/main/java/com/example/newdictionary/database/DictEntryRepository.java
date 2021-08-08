@@ -81,10 +81,10 @@ public class DictEntryRepository {
     }
 
     private void getSuggestionsFinished(Cursor result) {
-        suggestionsList.setValue(result);
+        suggestionsList.postValue(result);
     }
 
-    public LiveData<Cursor> getSuggestionsList() {
+    public MutableLiveData<Cursor> getSuggestionsList() {
         return suggestionsList;
     }
 

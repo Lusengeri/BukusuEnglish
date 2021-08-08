@@ -94,11 +94,14 @@ public class MainActivity extends BaseActivity  implements DictionaryFragmentsLi
         wordSearchView.setSubmitButtonEnabled(true);
         wordSearchView.setQueryHint("Search for a word");
         wordSearchView.setSuggestionsAdapter(new SuggestionCursorAdapter(getApplicationContext(), null, false));
-
         Observer<Cursor> suggestionObserver = new Observer<Cursor>() {
             @Override
             public void onChanged(Cursor suggestions) {
-                if (!suggestions.isClosed()) {
+                Cursor cur = wordSearchView.getSuggestionsAdapter().getCursor();
+
+                if ((cur == null) || cur.isClosed()) {
+                    wordSearchView.setSuggestionsAdapter(new SuggestionCursorAdapter(getApplicationContext(), suggestions, false));
+                } else {
                     wordSearchView.getSuggestionsAdapter().swapCursor(suggestions);
                 }
             }
@@ -121,7 +124,7 @@ public class MainActivity extends BaseActivity  implements DictionaryFragmentsLi
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                mainViewModel.searchForSuggestions(newText);
+                mainViewModel.searchForSuggestions(newText+"%");
                 return false;
             }
         });
@@ -150,7 +153,7 @@ public class MainActivity extends BaseActivity  implements DictionaryFragmentsLi
         switch (menuItem.getItemId()) {
             case (R.id.action_settings_and_help):
                 Intent settings_and_help_intent = new Intent(this, SettingsAndHelpActivity.class);
-                editor = getPreferences(MODE_PRIVATE).edit();
+                //editor = getPreferences(MODE_PRIVATE).edit();
                 editor.putString("query", wordSearchView.getQuery().toString());
                 editor.commit();
                 startActivity(settings_and_help_intent);

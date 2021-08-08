@@ -78,7 +78,7 @@ public class DictionaryEntryFragment extends Fragment {
                 }
             }
         };
-        mainViewModel.currentWord.observe(getViewLifecycleOwner(), currentWordObserver);
+        mainViewModel.getCurrentWord().observe(getViewLifecycleOwner(), currentWordObserver);
     }
 
     public void showSelectedDefinition(String word, String pos, String definition, String unaccented) {

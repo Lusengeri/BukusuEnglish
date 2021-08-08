@@ -9,12 +9,10 @@ import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.example.newdictionary.MainActivity;
 import com.example.newdictionary.R;
@@ -55,7 +53,7 @@ public class DictionaryLookupFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_word_list, container, false);
         alphabetScrollRecyclerViewAdapter = new AlphabetScrollRecyclerViewAdapter(mListener, getContext());
-        recyclerView = (AlphabetScrollRecyclerView) view.findViewById(R.id.list);
+        recyclerView = view.findViewById(R.id.list);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(alphabetScrollRecyclerViewAdapter);
         recyclerView.addItemDecoration(new AlphabetScrollRecyclerViewItemDecoration(getContext()));
@@ -75,7 +73,7 @@ public class DictionaryLookupFragment extends Fragment {
                 recyclerView.scrollToPosition(currWordIndex);
             }
         };
-        mainViewModel.currentWord.observe(getViewLifecycleOwner(), currentWordObserver);
+        mainViewModel.getCurrentWord().observe(getViewLifecycleOwner(), currentWordObserver);
 
         return view;
     }
@@ -83,7 +81,6 @@ public class DictionaryLookupFragment extends Fragment {
     @Override
     public void onViewCreated(View view,  Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        //MainActivity parentActivity = (MainActivity) getActivity();
         SharedPreferences preferences = getActivity().getPreferences(MainActivity.MODE_PRIVATE);
         currWord = preferences.getString("word", "");
         AlphabetScrollRecyclerViewAdapter adapter = (AlphabetScrollRecyclerViewAdapter) recyclerView.getAdapter();
