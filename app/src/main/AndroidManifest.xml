@@ -20,7 +20,9 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="com.alsoftware.bukusuenglish.MainActivity">
+        <activity
+            android:name="com.alsoftware.bukusuenglish.MainActivity"
+            android:screenOrientation="portrait">
         </activity>
 
         <activity

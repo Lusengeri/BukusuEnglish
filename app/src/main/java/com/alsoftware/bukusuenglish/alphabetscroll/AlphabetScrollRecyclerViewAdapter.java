@@ -6,7 +6,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
 import android.database.Cursor;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,7 +21,7 @@ import java.util.LinkedHashMap;
 public class AlphabetScrollRecyclerViewAdapter extends RecyclerView.Adapter<AlphabetScrollRecyclerViewAdapter.ViewHolder>
                                         implements AlphabetScrollRecyclerViewInterface {
     private final DictionaryFragmentsListener mListener;
-    private HashMap<String, Integer> mMapIndex = new HashMap<>();
+    private HashMap<String, Integer> mMapIndex;
     private final Cursor wordList;
     private Context ctx;
     private ArrayList<String> wordArrayList = new ArrayList<>();
@@ -32,7 +31,6 @@ public class AlphabetScrollRecyclerViewAdapter extends RecyclerView.Adapter<Alph
         ctx = context;
         wordList = mListener.getWordList();
 
-        //ArrayList<String> wordArrayList = new ArrayList<>();
         while ( wordList.moveToNext()) {
             wordArrayList.add(wordList.getString(0));
         }
@@ -68,7 +66,6 @@ public class AlphabetScrollRecyclerViewAdapter extends RecyclerView.Adapter<Alph
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
-        //String word = wordList.get(position);
         wordList.moveToPosition(position);
         String word = wordList.getString(0);
         holder.wordView.setText(word);
@@ -76,10 +73,6 @@ public class AlphabetScrollRecyclerViewAdapter extends RecyclerView.Adapter<Alph
         int currentTheme = PreferenceManager.getDefaultSharedPreferences(ctx)
                 .getInt("Theme", R.style.CustomAppTheme);
 
-        if (word.equals("aundi")) {
-            Log.i("info", "*** I've seen you my word ...");
-            Log.i("info", "The 'current word' is: " + mListener.getCurrentWord());
-        }
 
         if (word.equals(mListener.getCurrentWord())) {
             if (currentTheme == R.style.CustomAppTheme) {
