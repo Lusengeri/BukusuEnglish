@@ -1,4 +1,4 @@
-package com.example.newdictionary.database;
+package com.alsoftware.bukusuenglish.database;
 
 import android.content.Context;
 

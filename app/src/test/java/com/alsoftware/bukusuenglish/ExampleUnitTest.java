@@ -1,4 +1,4 @@
-package com.example.newdictionary;
+package com.alsoftware.bukusuenglish;
 
 import org.junit.Test;
 

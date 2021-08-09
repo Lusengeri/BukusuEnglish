@@ -1,4 +1,4 @@
-package com.example.newdictionary.alphabetscroll;
+package com.alsoftware.bukusuenglish.alphabetscroll;
 
 import androidx.annotation.NonNull;
 import androidx.preference.PreferenceManager;
@@ -12,8 +12,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.newdictionary.ui.main.DictionaryFragmentsListener;
-import com.example.newdictionary.R;
+import com.alsoftware.bukusuenglish.ui.main.DictionaryFragmentsListener;
+import com.alsoftware.bukusuenglish.R;
 
 import java.util.ArrayList;
 import java.util.HashMap;

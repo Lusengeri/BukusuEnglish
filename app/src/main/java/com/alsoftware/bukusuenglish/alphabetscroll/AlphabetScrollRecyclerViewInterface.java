@@ -1,4 +1,4 @@
-package com.example.newdictionary.alphabetscroll;
+package com.alsoftware.bukusuenglish.alphabetscroll;
 
 import java.util.HashMap;
 

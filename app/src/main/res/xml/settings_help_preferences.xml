@@ -15,7 +15,7 @@
         app:title="Help and Feedback"
         app:layout="@layout/preference_category_layout">
         <Preference
-            app:fragment="com.example.newdictionary.SettingsAndHelpActivity$HelpFragment"
+            app:fragment="com.alsoftware.bukusuenglish.SettingsAndHelpActivity$HelpFragment"
             app:layout="@layout/preference_option_layout"
             app:icon="@drawable/help_128"
             app:title="@string/help_menu_header"/>
@@ -34,7 +34,7 @@
             app:icon="@drawable/about_128"
             app:layout="@layout/preference_option_layout"
             app:title="@string/about_header"
-            app:fragment="com.example.newdictionary.SettingsAndHelpActivity$AboutFragment"/>
+            app:fragment="com.alsoftware.bukusuenglish.SettingsAndHelpActivity$AboutFragment"/>
     </PreferenceCategory>
 
 </PreferenceScreen>

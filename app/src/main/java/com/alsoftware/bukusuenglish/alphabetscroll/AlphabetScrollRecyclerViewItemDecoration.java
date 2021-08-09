@@ -1,15 +1,14 @@
-package com.example.newdictionary.alphabetscroll;
+package com.alsoftware.bukusuenglish.alphabetscroll;
 
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 
-import androidx.annotation.NonNull;
 import androidx.preference.PreferenceManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.newdictionary.R;
+import com.alsoftware.bukusuenglish.R;
 
 public class AlphabetScrollRecyclerViewItemDecoration extends RecyclerView.ItemDecoration {
     private Context mContext;

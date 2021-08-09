@@ -1,4 +1,4 @@
-package com.example.newdictionary.ui.main;
+package com.alsoftware.bukusuenglish.ui.main;
 
 import android.app.Application;
 import android.database.Cursor;
@@ -7,8 +7,8 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
-import com.example.newdictionary.database.DictEntry;
-import com.example.newdictionary.database.DictEntryRepository;
+import com.alsoftware.bukusuenglish.database.DictEntry;
+import com.alsoftware.bukusuenglish.database.DictEntryRepository;
 
 public class MainViewModel extends AndroidViewModel {
     private DictEntryRepository repository;

@@ -1,4 +1,4 @@
-package com.example.newdictionary;
+package com.alsoftware.bukusuenglish;
 
 import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
@@ -15,9 +15,9 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.example.newdictionary.database.DictEntry;
-import com.example.newdictionary.ui.main.DictionaryFragmentsListener;
-import com.example.newdictionary.ui.main.MainViewModel;
+import com.alsoftware.bukusuenglish.database.DictEntry;
+import com.alsoftware.bukusuenglish.ui.main.DictionaryFragmentsListener;
+import com.alsoftware.bukusuenglish.ui.main.MainViewModel;
 import com.google.android.material.tabs.TabLayout;
 
 public class MainActivity extends BaseActivity  implements DictionaryFragmentsListener {

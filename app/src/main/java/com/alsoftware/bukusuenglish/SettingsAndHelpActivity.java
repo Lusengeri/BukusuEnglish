@@ -1,4 +1,4 @@
-package com.example.newdictionary;
+package com.alsoftware.bukusuenglish;
 
 import android.app.Activity;
 import android.content.Context;
@@ -176,7 +176,7 @@ public class SettingsAndHelpActivity extends BaseActivity implements
     }
 
     public static Intent getAppStoreRatingIntent() {
-        Uri uri = Uri.parse("market://details?id=$packageName");
+        Uri uri = Uri.parse("market://details?id=com.alsoftware.bukusuenglish");
         Intent rateIntent = new Intent(Intent.ACTION_VIEW, uri);
         return rateIntent;
     }
@@ -184,7 +184,7 @@ public class SettingsAndHelpActivity extends BaseActivity implements
     public static Intent getAppShareIntent() {
         Intent shareIntent = new Intent(Intent.ACTION_SEND);
         shareIntent.putExtra(Intent.EXTRA_SUBJECT,"Bukusu-English Dictionary");
-        shareIntent.putExtra(Intent.EXTRA_TEXT,"https://play.google.com/store/apps/details?id=$packageName");
+        shareIntent.putExtra(Intent.EXTRA_TEXT,"https://play.google.com/store/apps/details?id=com.alsoftware.bukusuenglish");
         shareIntent.setType("text/plain");
         return shareIntent;
     }

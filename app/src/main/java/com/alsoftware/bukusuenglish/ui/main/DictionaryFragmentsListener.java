@@ -1,4 +1,4 @@
-package com.example.newdictionary.ui.main;
+package com.alsoftware.bukusuenglish.ui.main;
 
 import android.database.Cursor;
 

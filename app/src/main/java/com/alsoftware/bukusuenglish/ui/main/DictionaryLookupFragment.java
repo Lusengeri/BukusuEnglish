@@ -1,4 +1,4 @@
-package com.example.newdictionary.ui.main;
+package com.alsoftware.bukusuenglish.ui.main;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -14,12 +14,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.newdictionary.MainActivity;
-import com.example.newdictionary.R;
-import com.example.newdictionary.alphabetscroll.AlphabetScrollRecyclerView;
-import com.example.newdictionary.alphabetscroll.AlphabetScrollRecyclerViewItemDecoration;
-import com.example.newdictionary.alphabetscroll.AlphabetScrollRecyclerViewAdapter;
-import com.example.newdictionary.database.DictEntry;
+import com.alsoftware.bukusuenglish.MainActivity;
+import com.alsoftware.bukusuenglish.R;
+import com.alsoftware.bukusuenglish.alphabetscroll.AlphabetScrollRecyclerView;
+import com.alsoftware.bukusuenglish.alphabetscroll.AlphabetScrollRecyclerViewItemDecoration;
+import com.alsoftware.bukusuenglish.alphabetscroll.AlphabetScrollRecyclerViewAdapter;
+import com.alsoftware.bukusuenglish.database.DictEntry;
 
 public class DictionaryLookupFragment extends Fragment {
     private DictionaryFragmentsListener mListener;

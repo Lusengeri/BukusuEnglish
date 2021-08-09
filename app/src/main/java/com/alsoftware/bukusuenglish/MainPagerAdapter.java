@@ -1,12 +1,12 @@
-package com.example.newdictionary;
+package com.alsoftware.bukusuenglish;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
-import com.example.newdictionary.ui.main.DictionaryEntryFragment;
-import com.example.newdictionary.ui.main.DictionaryLookupFragment;
+import com.alsoftware.bukusuenglish.ui.main.DictionaryEntryFragment;
+import com.alsoftware.bukusuenglish.ui.main.DictionaryLookupFragment;
 
 
 public class MainPagerAdapter extends FragmentPagerAdapter {

@@ -1,11 +1,10 @@
-package com.example.newdictionary.alphabetscroll;
+package com.alsoftware.bukusuenglish.alphabetscroll;
 
 import android.content.Context;
 import android.graphics.Canvas;
 import android.os.Handler;
 import android.os.Message;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.MotionEvent;
 
 import androidx.annotation.NonNull;

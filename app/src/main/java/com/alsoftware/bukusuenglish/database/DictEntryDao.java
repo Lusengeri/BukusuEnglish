@@ -1,9 +1,7 @@
-package com.example.newdictionary.database;
+package com.alsoftware.bukusuenglish.database;
 
 import android.database.Cursor;
 
-import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
 import androidx.room.Dao;
 import androidx.room.Query;
 

@@ -1,4 +1,4 @@
-package com.example.newdictionary.ui.main;
+package com.alsoftware.bukusuenglish.ui.main;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -14,9 +14,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.newdictionary.MainActivity;
-import com.example.newdictionary.R;
-import com.example.newdictionary.database.DictEntry;
+import com.alsoftware.bukusuenglish.MainActivity;
+import com.alsoftware.bukusuenglish.R;
+import com.alsoftware.bukusuenglish.database.DictEntry;
 
 public class DictionaryEntryFragment extends Fragment {
     private TextView posView;

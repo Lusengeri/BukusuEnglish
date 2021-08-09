@@ -1,4 +1,4 @@
-package com.example.newdictionary.database;
+package com.alsoftware.bukusuenglish.database;
 
 import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
