@@ -8,6 +8,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 
+
 public class SplashActivity extends AppCompatActivity {
     Animation animation;
     ImageView imageView;
