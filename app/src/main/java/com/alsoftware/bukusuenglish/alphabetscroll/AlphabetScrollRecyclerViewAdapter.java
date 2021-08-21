@@ -18,13 +18,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 
-public class AlphabetScrollRecyclerViewAdapter extends RecyclerView.Adapter<AlphabetScrollRecyclerViewAdapter.ViewHolder>
+public class AlphabetScrollRecyclerViewAdapter extends AlphabetScrollRecyclerView.Adapter<AlphabetScrollRecyclerViewAdapter.ViewHolder>
                                         implements AlphabetScrollRecyclerViewInterface {
     private final DictionaryFragmentsListener mListener;
-    private HashMap<String, Integer> mMapIndex;
+    private final HashMap<String, Integer> mMapIndex;
     private final Cursor wordList;
-    private Context ctx;
-    private ArrayList<String> wordArrayList = new ArrayList<>();
+    private final Context ctx;
+    private final ArrayList<String> wordArrayList = new ArrayList<>();
 
     public AlphabetScrollRecyclerViewAdapter(DictionaryFragmentsListener listener, Context context) {
         mListener = listener;
@@ -92,13 +92,11 @@ public class AlphabetScrollRecyclerViewAdapter extends RecyclerView.Adapter<Alph
             }
         }
 
-        holder.mView.setOnClickListener(new View.OnClickListener() {
+        holder.wordView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (null != mListener) {
-                    mListener.onListFragmentInteraction(holder.wordView.getText().toString());
-                    notifyDataSetChanged();
-                }
+                mListener.onListFragmentInteraction(holder.wordView.getText().toString());
+                notifyDataSetChanged();
             }
         });
     }
@@ -117,19 +115,17 @@ public class AlphabetScrollRecyclerViewAdapter extends RecyclerView.Adapter<Alph
         return wordList.getCount();
     }
 
+    @Override
+    public long getItemId(int position) {
+        return super.getItemId(position);
+    }
+
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        public final View mView;
         public final TextView wordView;
 
         public ViewHolder(View view) {
             super(view);
-            mView = view;
             wordView = view.findViewById(R.id.content);
-        }
-
-        @Override
-        public String toString() {
-            return super.toString() + " '" + wordView.getText() + "'";
         }
     }
 }

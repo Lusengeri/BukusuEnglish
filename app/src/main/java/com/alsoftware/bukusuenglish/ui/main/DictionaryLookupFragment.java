@@ -2,6 +2,7 @@ package com.alsoftware.bukusuenglish.ui.main;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -21,7 +22,7 @@ import com.alsoftware.bukusuenglish.alphabetscroll.AlphabetScrollRecyclerViewIte
 import com.alsoftware.bukusuenglish.alphabetscroll.AlphabetScrollRecyclerViewAdapter;
 import com.alsoftware.bukusuenglish.database.DictEntry;
 
-public class DictionaryLookupFragment extends Fragment {
+public class DictionaryLookupFragment extends Fragment implements DictionaryFragmentsListener{
     private DictionaryFragmentsListener mListener;
     private AlphabetScrollRecyclerView recyclerView;
     private AlphabetScrollRecyclerViewAdapter alphabetScrollRecyclerViewAdapter;
@@ -38,30 +39,22 @@ public class DictionaryLookupFragment extends Fragment {
 
     @Override
     public void onAttach(Context context) {
+        mListener = (DictionaryFragmentsListener) context;
+        mainViewModel = ((MainActivity) getActivity()).getMainViewModel();
+        alphabetScrollRecyclerViewAdapter = new AlphabetScrollRecyclerViewAdapter(mListener, getContext());
         super.onAttach(context);
-
-        if (context instanceof DictionaryFragmentsListener) {
-            mListener = (DictionaryFragmentsListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement DictionaryFragmentsListener");
-        }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_word_list, container, false);
-        alphabetScrollRecyclerViewAdapter = new AlphabetScrollRecyclerViewAdapter(mListener, getContext());
         recyclerView = view.findViewById(R.id.list);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(alphabetScrollRecyclerViewAdapter);
         recyclerView.addItemDecoration(new AlphabetScrollRecyclerViewItemDecoration(getContext()));
         recyclerView.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
-
-        MainActivity parentActivity = (MainActivity) getActivity();
-        mainViewModel = parentActivity.getMainViewModel();
 
         Observer<DictEntry> currentWordObserver = new Observer<DictEntry>() {
             @Override
@@ -115,5 +108,19 @@ public class DictionaryLookupFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
+    }
+
+    public void onListFragmentInteraction(String word) {
+        mListener.onListFragmentInteraction(word);
+    }
+
+    @Override
+    public Cursor getWordList() {
+        return mainViewModel.getWordList();
+    }
+
+    @Override
+    public String getCurrentWord() {
+        return mainViewModel.getCurrentWord().getValue().getWord();
     }
 }
