@@ -125,7 +125,7 @@ public class AlphabetScrollRecyclerViewAdapter extends AlphabetScrollRecyclerVie
 
         public ViewHolder(View view) {
             super(view);
-            wordView = view.findViewById(R.id.content);
+            wordView = view.findViewById(R.id.dictionaryWord);
         }
     }
 }

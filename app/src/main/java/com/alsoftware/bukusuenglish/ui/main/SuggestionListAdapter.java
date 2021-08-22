@@ -45,7 +45,6 @@ public class SuggestionListAdapter extends RecyclerView.Adapter<SuggestionListAd
             @Override
             public void onClick(View view) {
                 activity.returnFromSearch(word);
-                Navigation.findNavController(activity, R.id.fragmentContainerView).navigate(R.id.action_to_dictionary);
             }
         });
     }
@@ -65,7 +64,7 @@ public class SuggestionListAdapter extends RecyclerView.Adapter<SuggestionListAd
         public SuggestionViewHolder(@NonNull View itemView) {
             super(itemView);
             view = itemView;
-            suggestView = (TextView) itemView;
+            suggestView = itemView.findViewById(R.id.dictionaryWord);
         }
     }
 }

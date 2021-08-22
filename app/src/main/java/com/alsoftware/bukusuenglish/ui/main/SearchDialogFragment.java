@@ -28,30 +28,32 @@ public class SearchDialogFragment extends Fragment {
         super.onAttach(context);
         mainActivity = (MainActivity) context;
         mainViewModel = mainActivity.getMainViewModel();
+        mainViewModel.searchForSuggestions("%");
     }
 
     @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable  Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
+                             @Nullable  Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_search_dialog, container, false);
 
+        Cursor startingCursor = mainViewModel.getSuggestionsList().getValue();
         Context ctx = getContext();
         RecyclerView suggestionList = view.findViewById(R.id.suggestionList);
-        suggestionList.setLayoutManager(new LinearLayoutManager(ctx));
-        SuggestionListAdapter adapter = new SuggestionListAdapter(mainActivity, null);
-        suggestionList.setAdapter(adapter);
 
+        suggestionList.setLayoutManager(new LinearLayoutManager(ctx));
+        SuggestionListAdapter adapter = new SuggestionListAdapter(mainActivity, startingCursor);
+        suggestionList.setAdapter(adapter);
         suggestionList.addItemDecoration(new DividerItemDecoration(ctx, DividerItemDecoration.VERTICAL));
         suggestionList.setItemAnimator(new DefaultItemAnimator());
 
-        Observer<Cursor> suggestionObserver = new Observer<Cursor>() {
-            @Override
-            public void onChanged(Cursor newCursor) {
-                ((SuggestionListAdapter)suggestionList.getAdapter()).swapCursor(newCursor);
+        Observer<Cursor> suggestionObserver = newCursor -> {
+            SuggestionListAdapter listAdapter = ((SuggestionListAdapter)suggestionList.getAdapter());
+            if (listAdapter != null) {
+                listAdapter.swapCursor(newCursor);
             }
         };
         mainViewModel.getSuggestionsList().observe(getViewLifecycleOwner(), suggestionObserver);
-
         return view;
     }
 }

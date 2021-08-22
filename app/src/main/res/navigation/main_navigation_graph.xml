@@ -12,7 +12,11 @@
         tools:layout="@layout/fragment_dictionary_interface" >
         <action
             android:id="@+id/action_to_search"
-            app:destination="@id/searchDialogFragment" />
+            app:destination="@id/searchDialogFragment"
+            app:enterAnim="@anim/slide_down_into"
+            app:exitAnim="@anim/slide_down_outof"
+            app:popEnterAnim="@anim/slide_down_into"
+            app:popExitAnim="@anim/slide_down_outof" />
     </fragment>
     <fragment
         android:id="@+id/searchDialogFragment"
@@ -21,6 +25,10 @@
         tools:layout="@layout/fragment_search_dialog" >
         <action
             android:id="@+id/action_to_dictionary"
-            app:destination="@id/dictionaryInterfaceFragment" />
+            app:destination="@id/dictionaryInterfaceFragment"
+            app:enterAnim="@anim/slide_up_into"
+            app:exitAnim="@anim/slide_up_outof"
+            app:popEnterAnim="@anim/slide_up_into"
+            app:popExitAnim="@anim/slide_up_outof" />
     </fragment>
 </navigation>

@@ -16,6 +16,8 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 
 import com.alsoftware.bukusuenglish.database.DictEntry;
 import com.alsoftware.bukusuenglish.ui.main.DictionaryFragmentsListener;
@@ -145,5 +147,6 @@ public class MainActivity extends BaseActivity  implements DictionaryFragmentsLi
     public void returnFromSearch(String word) {
         mainViewModel.searchForWord(word);
         wordSearchView.onActionViewCollapsed();
+        controller.navigate(R.id.action_to_dictionary);
     }
 }
