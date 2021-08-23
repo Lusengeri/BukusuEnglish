@@ -16,19 +16,20 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
+import android.view.View;
 
 import com.alsoftware.bukusuenglish.database.DictEntry;
 import com.alsoftware.bukusuenglish.ui.main.DictionaryFragmentsListener;
 import com.alsoftware.bukusuenglish.ui.main.DictionaryInterfaceFragment;
 import com.alsoftware.bukusuenglish.ui.main.MainViewModel;
+import com.google.android.material.tabs.TabLayout;
 
 public class MainActivity extends BaseActivity  implements DictionaryFragmentsListener {
     private SearchView wordSearchView;
     public MainViewModel mainViewModel;
     private String currentWord;
     private NavController controller;
+    private TabLayout tabLayout;
 
     public MainViewModel getMainViewModel() {
         return mainViewModel;
@@ -42,6 +43,7 @@ public class MainActivity extends BaseActivity  implements DictionaryFragmentsLi
         Toolbar toolbar = findViewById(R.id.mainToolbar);
         setSupportActionBar(toolbar);
 
+        tabLayout = findViewById(R.id.mainTabLayout);
         currentWord = getPreferences(MainActivity.MODE_PRIVATE).getString("word", null);
 
         configureDataSources();
@@ -74,10 +76,18 @@ public class MainActivity extends BaseActivity  implements DictionaryFragmentsLi
         wordSearchView.setIconifiedByDefault(true);
         wordSearchView.setQueryHint("Search for a word");
 
-        wordSearchView.setOnSearchClickListener(view -> controller.navigate(R.id.action_to_search));
+        wordSearchView.setOnSearchClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                removeTabLayout();
+                controller.navigate(R.id.action_to_search);
+                removeTabLayout();
+            }
+        });
 
         wordSearchView.setOnCloseListener(() -> {
             controller.navigate(R.id.action_to_dictionary);
+            reinstateTabLayout();
             return false;
         });
 
@@ -86,6 +96,7 @@ public class MainActivity extends BaseActivity  implements DictionaryFragmentsLi
             public boolean onQueryTextSubmit(String query) {
                 mainViewModel.searchForWord(query);
                 controller.navigate(R.id.action_to_dictionary);
+                reinstateTabLayout();
                 wordSearchView.onActionViewCollapsed();
                 return false;
             }
@@ -148,5 +159,18 @@ public class MainActivity extends BaseActivity  implements DictionaryFragmentsLi
         mainViewModel.searchForWord(word);
         wordSearchView.onActionViewCollapsed();
         controller.navigate(R.id.action_to_dictionary);
+        reinstateTabLayout();
+    }
+
+    public TabLayout getTabLayout() {
+        return tabLayout;
+    }
+
+    private void removeTabLayout() {
+        tabLayout.setVisibility(View.GONE);
+    }
+
+    private void reinstateTabLayout() {
+        tabLayout.setVisibility(View.VISIBLE);
     }
 }

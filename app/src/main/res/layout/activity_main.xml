@@ -1,22 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/coordinatorLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
     <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/appbar"
+        android:id="@+id/mainActivityAppbar"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        app:elevation="0dp">
+        android:layout_height="wrap_content"
+        android:animateLayoutChanges="true">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/mainToolbar"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/mainTabLayout"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:animateLayoutChanges="true"
+            app:tabBackground="?attr/colorPrimary"
+            app:tabGravity="fill"
+            app:tabIconTint="@color/brightWhite"
+            app:tabIndicatorColor="@color/brightWhite"
+            app:tabSelectedTextColor="@color/brightWhite"
+            app:tabTextColor="?android:attr/textColorHint" />
 
     </com.google.android.material.appbar.AppBarLayout>
 

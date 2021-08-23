@@ -1,18 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/helpAndFeedbackToolbar"
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/settingsActivityAppbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="?attr/colorPrimary"
-        android:minHeight="?attr/actionBarSize"/>
+        android:layout_height="?attr/actionBarSize"
+        tools:elevation="1dp">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/helpAndFeedbackToolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize" />
+
+    </com.google.android.material.appbar.AppBarLayout>
 
     <FrameLayout
         android:id="@+id/help_and_feedback"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
+
 </LinearLayout>

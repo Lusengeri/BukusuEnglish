@@ -38,9 +38,9 @@ public class DictionaryInterfaceFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable  Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_dictionary_interface, container, false);
-        TabLayout tabLayout = view.findViewById(R.id.mainTabLayout);
-        viewPager = view.findViewById(R.id.mainViewPager);
 
+        TabLayout tabLayout = parentActivity.getTabLayout();
+        viewPager = view.findViewById(R.id.mainViewPager);
         MainPagerAdapter mainPagerAdapter = new MainPagerAdapter(parentActivity.getSupportFragmentManager(), getLifecycle());
         viewPager.setAdapter(mainPagerAdapter);
 
@@ -54,10 +54,8 @@ public class DictionaryInterfaceFragment extends Fragment {
                 }
             }
         };
-
         TabLayoutMediator mediator = new TabLayoutMediator(tabLayout, viewPager, strategy);
         mediator.attach();
-
         return view;
     }
 
