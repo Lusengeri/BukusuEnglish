@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.alsoftware.bukusuenglish.R;
 
 public class AlphabetScrollRecyclerViewItemDecoration extends RecyclerView.ItemDecoration {
-    private Context mContext;
+    private final Context mContext;
     public AlphabetScrollRecyclerViewItemDecoration(Context context) {
         mContext = context;
     }
@@ -23,19 +23,21 @@ public class AlphabetScrollRecyclerViewItemDecoration extends RecyclerView.ItemD
 
         if (((AlphabetScrollRecyclerView) parent).indexBarVisibility) {
             float scaledWidth = ((AlphabetScrollRecyclerView) parent).scaledWidth;
-            float sx = ((AlphabetScrollRecyclerView) parent).sx;
             float scaledHeight = ((AlphabetScrollRecyclerView) parent).scaledHeight;
-            //float sy = ((AlphabetScrollRecyclerView) parent).sy;
-            float sy = (float) ((parent.getHeight() - (scaledHeight * ((AlphabetScrollRecyclerView) (parent)).sections.length)) / 2.0);
+
+            float indexBarPosX = ((AlphabetScrollRecyclerView) parent).indexBarPosX;
+            float indexBarPosY = ((AlphabetScrollRecyclerView) parent).indexBarPosY;
+
             String[] sections = ((AlphabetScrollRecyclerView) parent).sections;
             String section = ((AlphabetScrollRecyclerView) parent).section;
+
             boolean showLetter = ((AlphabetScrollRecyclerView) parent).showLetter;
 
             int currentTheme = PreferenceManager.getDefaultSharedPreferences(mContext)
                     .getInt("Theme", R.style.CustomAppTheme);
 
             // We draw the letter in the middle
-            if (showLetter & section != null && !section.equals("")) {
+            if (showLetter && section != null && !section.equals("")) {
                 //overlay everything when displaying selected index Letter in the middle
                 Paint overlayDark = new Paint();
                 overlayDark.setColor(Color.BLACK);
@@ -67,8 +69,7 @@ public class AlphabetScrollRecyclerViewItemDecoration extends RecyclerView.ItemD
             textPaint.setStyle(Paint.Style.FILL);
 
             for (int i = 0; i < sections.length; i++) {
-                if (showLetter && section != null && !section.equals("") && section != null
-                        && sections[i].toUpperCase().equals(section.toUpperCase())) {
+                if (showLetter && section != null && !section.equals("") && sections[i].toUpperCase().equals(section.toUpperCase())) {
 
                     if (currentTheme == R.style.CustomAppTheme) {
                         textPaint.setColor(parent.getResources().getColor(R.color.primaryLight));
@@ -79,11 +80,11 @@ public class AlphabetScrollRecyclerViewItemDecoration extends RecyclerView.ItemD
                     textPaint.setFakeBoldText(true);
                     textPaint.setTextSize(scaledWidth / 2);
                     canvas.drawText(sections[i].toUpperCase(),
-                            sx + textPaint.getTextSize() / 2, sy + parent.getPaddingTop()
+                            indexBarPosX + textPaint.getTextSize() / 2, indexBarPosY + parent.getPaddingTop()
                                     + scaledHeight * (i + 1), textPaint);
                     textPaint.setTextSize(scaledWidth);
                     canvas.drawText("•",
-                            sx - textPaint.getTextSize() / 3, sy + parent.getPaddingTop()
+                            indexBarPosX - textPaint.getTextSize() / 3, indexBarPosY + parent.getPaddingTop()
                                     + scaledHeight * (i + 1) + scaledHeight / 3, textPaint);
                 } else {
                     textPaint.setColor(Color.LTGRAY);
@@ -91,7 +92,7 @@ public class AlphabetScrollRecyclerViewItemDecoration extends RecyclerView.ItemD
                     textPaint.setFakeBoldText(false);
                     textPaint.setTextSize(scaledWidth / 2);
                     canvas.drawText(sections[i].toUpperCase(),
-                            sx + textPaint.getTextSize() / 2, sy + parent.getPaddingTop()
+                            indexBarPosX + textPaint.getTextSize() / 2, indexBarPosY + parent.getPaddingTop()
                                     + scaledHeight * (i + 1), textPaint);
                 }
             }

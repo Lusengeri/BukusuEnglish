@@ -1,10 +1,10 @@
 package com.alsoftware.bukusuenglish.ui.main;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.DefaultItemAnimator;
@@ -25,7 +25,6 @@ import com.alsoftware.bukusuenglish.database.DictEntry;
 public class DictionaryLookupFragment extends Fragment implements DictionaryFragmentsListener{
     private DictionaryFragmentsListener mListener;
     private AlphabetScrollRecyclerView recyclerView;
-    private AlphabetScrollRecyclerViewAdapter alphabetScrollRecyclerViewAdapter;
     private MainViewModel mainViewModel;
     private String currWord;
     private int currWordIndex;
@@ -38,10 +37,9 @@ public class DictionaryLookupFragment extends Fragment implements DictionaryFrag
     }
 
     @Override
-    public void onAttach(Context context) {
+    public void onAttach(@NonNull Context context) {
         mListener = (DictionaryFragmentsListener) context;
-        mainViewModel = ((MainActivity) getActivity()).getMainViewModel();
-        alphabetScrollRecyclerViewAdapter = new AlphabetScrollRecyclerViewAdapter(mListener, getContext());
+        mainViewModel = ((MainActivity) context).getMainViewModel();
         super.onAttach(context);
     }
 
@@ -49,12 +47,14 @@ public class DictionaryLookupFragment extends Fragment implements DictionaryFrag
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_word_list, container, false);
+        AlphabetScrollRecyclerViewAdapter adapter = new AlphabetScrollRecyclerViewAdapter(mListener, getContext());
+
         recyclerView = view.findViewById(R.id.list);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        recyclerView.setAdapter(alphabetScrollRecyclerViewAdapter);
-        recyclerView.addItemDecoration(new AlphabetScrollRecyclerViewItemDecoration(getContext()));
-        recyclerView.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
+        recyclerView.setAdapter(adapter);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
+        recyclerView.addItemDecoration(new AlphabetScrollRecyclerViewItemDecoration(getContext()));
 
         Observer<DictEntry> currentWordObserver = new Observer<DictEntry>() {
             @Override
@@ -68,18 +68,10 @@ public class DictionaryLookupFragment extends Fragment implements DictionaryFrag
         };
         mainViewModel.getCurrentWord().observe(getViewLifecycleOwner(), currentWordObserver);
 
+        currWord = mListener.getCurrentWord();
+        currWordIndex = ((AlphabetScrollRecyclerViewAdapter) recyclerView.getAdapter()).getIndexOf(currWord);
+        recyclerView.getAdapter().notifyDataSetChanged();
         return view;
-    }
-
-    @Override
-    public void onViewCreated(View view,  Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        SharedPreferences preferences = getActivity().getPreferences(MainActivity.MODE_PRIVATE);
-        currWord = preferences.getString("word", "");
-        AlphabetScrollRecyclerViewAdapter adapter = (AlphabetScrollRecyclerViewAdapter) recyclerView.getAdapter();
-        currWordIndex = adapter.getIndexOf(currWord);
-        recyclerView.scrollToPosition(currWordIndex);
-        adapter.notifyDataSetChanged();
     }
 
     public void scrollToCurrentWord() {
@@ -87,27 +79,15 @@ public class DictionaryLookupFragment extends Fragment implements DictionaryFrag
     }
 
     @Override
-    public void onStart() {
-        super.onStart();
-        scrollToCurrentWord();
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        scrollToCurrentWord();
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        scrollToCurrentWord();
-    }
-
-    @Override
     public void onDetach() {
         super.onDetach();
         mListener = null;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        scrollToCurrentWord();
     }
 
     public void onListFragmentInteraction(String word) {

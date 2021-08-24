@@ -22,8 +22,8 @@ public class AlphabetScrollRecyclerView extends RecyclerView {
     public float scaledHeight;
     public static int indWidth = 25;
     public static int indHeight = 22;
-    public float sx;
-    public float sy;
+    public float indexBarPosX;
+    public float indexBarPosY;
     public String section;
     public boolean showLetter = false;
     public boolean indexBarVisibility;
@@ -77,75 +77,98 @@ public class AlphabetScrollRecyclerView extends RecyclerView {
 
         //The following horizontally positions the 'Index Bar' at the center of the space
         //between the RecyclerView and the right-hand edge of the screen
-        sx = this.getWidth() - this.getPaddingRight() + (this.getPaddingRight()/2) - (scaledWidth/2);
+        indexBarPosX = this.getWidth() - this.getPaddingRight() + (this.getPaddingRight()/2) - (scaledWidth/2);
 
         //The following vertically centers the 'Index-bar'
-        sy = (float) ((this.getHeight() - (scaledHeight * sections.length)) / 2.0);
-        boolean setupThings = true;
+        indexBarPosY = (float) ((this.getHeight() - (scaledHeight * sections.length)) / 2.0);
     }
 
     @Override
     public boolean onTouchEvent(MotionEvent e) {
-
         if (indexBarVisibility) {
-            float x = e.getX();
-            float y = e.getY();
+            float touchPositionX = e.getX();
+            float touchPositionY = e.getY();
 
             switch (e.getAction()) {
                 case MotionEvent.ACTION_DOWN: {
-                    if (((x < sx) || x > (sx +scaledWidth) ) || y < sy || y > (sy + scaledHeight * sections.length)) {
+                    if (((touchPositionX < indexBarPosX) ||
+                            touchPositionX > (indexBarPosX +scaledWidth) ) ||
+                            touchPositionY < indexBarPosY ||
+                            touchPositionY > (indexBarPosY + scaledHeight * sections.length)) {
+                        //On touching an area not on the 'Index-Bar'
+                        showLetter = false;
+                        AlphabetScrollRecyclerView.this.invalidate();
                         return super.onTouchEvent(e);
                     } else {
-                        //We touched the index bar
-                        float yy = y - this.getPaddingTop() - getPaddingBottom() - sy;
-                        int currentPosition = (int) Math.floor(yy / scaledHeight);
-
-                        if (currentPosition < 0) {
-                            currentPosition = 0;
-                        }
-                        if (currentPosition >=sections.length) {
-                            currentPosition = sections.length - 1;
-                        }
-                        section = sections[currentPosition];
+                        //Ensure the touched letter will be shown
                         showLetter = true;
+
+                        //Obtain the fractional distance between the top of the 'Index-Bar' and the touched position
+                        float distanceToTouched = (touchPositionY - indexBarPosY) / (scaledHeight*sections.length);
+
+                        //Calculate the offset to the touched section/letter
+                        int yOffset = (int) Math.floor(distanceToTouched * (sections.length));
+
+                        if (yOffset < 0) {
+                            yOffset = 0;
+                        } else if (yOffset == sections.length){
+                            yOffset = sections.length - 1;
+                        }
+
+                        section = sections[yOffset];
+
                         int positionInData = 0;
-                        int itemCount = 0;
 
                         if (((AlphabetScrollRecyclerViewInterface)getAdapter()).getMapIndex().containsKey(section.toUpperCase())) {
                             positionInData = ((AlphabetScrollRecyclerViewInterface) getAdapter()).getMapIndex().get(section.toUpperCase());
-                            //itemCount = getAdapter().getItemCount();
                         }
-                        this.scrollToPosition(positionInData+10);
-                        AlphabetScrollRecyclerView.this.invalidate();
-                    }
-                    break;
-                }
-                case MotionEvent.ACTION_MOVE: {
-
-                    if (!showLetter && (x < sx || x > (sx+scaledWidth) || y < sy || y > (sy + scaledHeight*sections.length)))
-                        return super.onTouchEvent(e);
-                    else {
-                        float yy = y - sy;
-                        int currentPosition = (int) Math.floor(yy / scaledHeight);
-                        if(currentPosition<0)currentPosition=0;
-                        if(currentPosition>=sections.length)currentPosition=sections.length-1;
-                        section = sections[currentPosition];
-                        showLetter = true;
-                        int positionInData = 0;
-                        if(((AlphabetScrollRecyclerViewInterface)getAdapter()).getMapIndex().containsKey(section.toUpperCase()) )
-                            positionInData = ((AlphabetScrollRecyclerViewInterface)getAdapter()).getMapIndex().get(section.toUpperCase());
                         this.scrollToPosition(positionInData);
                         AlphabetScrollRecyclerView.this.invalidate();
+                        return true;
                     }
-                    break;
+                }
+                case MotionEvent.ACTION_MOVE: {
+                    if ((touchPositionX < indexBarPosX ||
+                            touchPositionX > (indexBarPosX +scaledWidth) ||
+                            touchPositionY < indexBarPosY ||
+                            touchPositionY > (indexBarPosY + scaledHeight*sections.length))) {
+                        //If finger moved off 'Index-Bar' revert to normal touch response
+                        showLetter = false;
+                        AlphabetScrollRecyclerView.this.invalidate();
+                        return super.onTouchEvent(e);
+                    }
+                    else {
+                        showLetter = true;
+                        //Obtain the fractional distance between the top of the 'Index-Bar' and the touched position
+                        float distanceToTouched = (touchPositionY - indexBarPosY) / (scaledHeight*sections.length);
+                        //Calculate the offset to the touched section/letter
+                        int yOffset = (int) Math.floor(distanceToTouched * (sections.length));
+
+                        if (yOffset < 0) {
+                            yOffset = 0;
+                        } else if (yOffset == sections.length){
+                            yOffset = sections.length - 1;
+                        }
+
+                        section = sections[yOffset];
+
+                        int positionInData = 0;
+
+                        if (((AlphabetScrollRecyclerViewInterface)getAdapter()).getMapIndex().containsKey(section.toUpperCase())) {
+                            positionInData = ((AlphabetScrollRecyclerViewInterface) getAdapter()).getMapIndex().get(section.toUpperCase());
+                        }
+                        this.scrollToPosition(positionInData);
+                        AlphabetScrollRecyclerView.this.invalidate();
+                        return true;
+                    }
                 }
                 case MotionEvent.ACTION_UP: {
                     Handler listHandler = new ListHandler();
                     listHandler.sendEmptyMessageDelayed(0, 100);
-                    if (x < sx || x > (sx+scaledWidth) || y < sy || y > (sy + scaledHeight*sections.length))
-                        return super.onTouchEvent(e);
-                    else
-                        return true;
+
+                    showLetter = false;
+                    AlphabetScrollRecyclerView.this.invalidate();
+                    return super.onTouchEvent(e);
                 }
             }
             return true;

@@ -30,14 +30,16 @@ public class AlphabetScrollRecyclerViewAdapter extends AlphabetScrollRecyclerVie
         mListener = listener;
         ctx = context;
         wordList = mListener.getWordList();
+        wordList.moveToFirst();
 
-        while ( wordList.moveToNext()) {
+        do {
             wordArrayList.add(wordList.getString(0));
-        }
-        mMapIndex = calculateIndexesForName(wordArrayList);
+        } while ( wordList.moveToNext());
+
+        mMapIndex = calculateIndexesFromWordList(wordArrayList);
     }
 
-    private HashMap<String, Integer> calculateIndexesForName(ArrayList<String> items) {
+    private HashMap<String, Integer> calculateIndexesFromWordList(ArrayList<String> items) {
         HashMap<String, Integer> mapIndex = new LinkedHashMap<>();
         for (int i = 0; i<items.size(); i++) {
             String name = items.get(i);
