@@ -11,7 +11,7 @@
     <PreferenceCategory
         app:layout="@layout/preference_category_layout">
         <Preference
-            app:title="Version 1.0"
+            app:title="Version 1.3.2"
             app:layout="@layout/preference_option_layout"
             app:icon="@drawable/serialization_128"/>
     </PreferenceCategory>
