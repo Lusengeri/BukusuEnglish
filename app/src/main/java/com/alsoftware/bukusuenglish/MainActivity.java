@@ -17,6 +17,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.alsoftware.bukusuenglish.database.DictEntry;
 import com.alsoftware.bukusuenglish.ui.main.DictionaryFragmentsListener;
@@ -172,5 +173,18 @@ public class MainActivity extends BaseActivity  implements DictionaryFragmentsLi
 
     private void reinstateTabLayout() {
         tabLayout.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void onBackPressed() {
+        String current_destination = controller.getCurrentDestination().getLabel().toString();
+
+        if (current_destination.equals("fragment_dictionary_interface")) {
+            this.finish();
+        } else if (current_destination.equals("fragment_search_dialog")) {
+            controller.navigate(R.id.action_to_dictionary);
+            reinstateTabLayout();
+            wordSearchView.onActionViewCollapsed();
+        }
     }
 }
