@@ -22,13 +22,14 @@ import com.alsoftware.bukusuenglish.R;
 public class SearchDialogFragment extends Fragment {
     private MainViewModel mainViewModel;
     private MainActivity mainActivity;
+    private DictionaryFragmentsListener mListener;
 
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
         mainActivity = (MainActivity) context;
+        mListener = (DictionaryFragmentsListener) context;
         mainViewModel = mainActivity.getMainViewModel();
-        mainViewModel.searchForSuggestions("%");
     }
 
     @Nullable
@@ -55,5 +56,11 @@ public class SearchDialogFragment extends Fragment {
         };
         mainViewModel.getSuggestionsList().observe(getViewLifecycleOwner(), suggestionObserver);
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        mainViewModel.searchForSuggestions(mListener.getCurrentSearchTerm() + "%");
+        super.onResume();
     }
 }

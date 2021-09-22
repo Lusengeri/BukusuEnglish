@@ -48,9 +48,9 @@ public class DictionaryInterfaceFragment extends Fragment {
             @Override
             public void onConfigureTab(@NonNull TabLayout.Tab tab, int position) {
                 if (position == 0) {
-                    tab.setText("DEFINITION");
+                    tab.setText(R.string.definition);
                 } else {
-                    tab.setText("LOOKUP");
+                    tab.setText(R.string.lookup);
                 }
             }
         };

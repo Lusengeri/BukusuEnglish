@@ -8,7 +8,6 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.alsoftware.bukusuenglish.MainActivity;
@@ -64,7 +63,7 @@ public class SuggestionListAdapter extends RecyclerView.Adapter<SuggestionListAd
         public SuggestionViewHolder(@NonNull View itemView) {
             super(itemView);
             view = itemView;
-            suggestView = itemView.findViewById(R.id.dictionaryWord);
+            suggestView = itemView.findViewById(R.id.wordTextView);
         }
     }
 }

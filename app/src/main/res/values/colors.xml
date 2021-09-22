@@ -19,4 +19,6 @@
     <color name="hintColorLight">#4FC3F7</color>
     <color name="surfaceDark">#37474F</color>
     <color name="lightSystemMenu">#1565C0</color>
+    <color name="list_card_highlight_light">#4DAAAAAA</color>
+    <color name="list_card_highlight_dark">#FF263238</color>
 </resources>

@@ -6,4 +6,6 @@ public interface DictionaryFragmentsListener {
     void onListFragmentInteraction(String word);
     Cursor getWordList();
     String getCurrentWord();
+    String getCurrentSearchTerm();
+    void storeCurrentSearchTerm();
 }

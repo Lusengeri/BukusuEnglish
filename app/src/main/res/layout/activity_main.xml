@@ -27,7 +27,29 @@
             app:tabIconTint="@color/brightWhite"
             app:tabIndicatorColor="@color/brightWhite"
             app:tabSelectedTextColor="@color/brightWhite"
-            app:tabTextColor="?android:attr/textColorHint" />
+            app:tabTextColor="?android:attr/textColorHint"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:foregroundGravity="fill"
+            app:tabUnboundedRipple="false"
+            app:tabRippleColor="@color/brightWhite"
+            android:clickable="true"
+            android:focusable="true">
+
+            <com.google.android.material.tabs.TabItem
+                android:id="@+id/definitionTabItem"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/definition" />
+
+            <com.google.android.material.tabs.TabItem
+                android:id="@+id/lookupTabItem"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/lookup"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:foregroundGravity="fill"
+                android:clickable="true"/>
+        </com.google.android.material.tabs.TabLayout>
 
     </com.google.android.material.appbar.AppBarLayout>
 

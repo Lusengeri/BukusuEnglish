@@ -80,6 +80,7 @@ public class MainActivity extends BaseActivity  implements DictionaryFragmentsLi
         wordSearchView.setOnSearchClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                wordSearchView.setQuery(getPreferences(MainActivity.MODE_PRIVATE).getString("query", null), false);
                 removeTabLayout();
                 controller.navigate(R.id.action_to_search);
                 removeTabLayout();
@@ -98,6 +99,7 @@ public class MainActivity extends BaseActivity  implements DictionaryFragmentsLi
                 mainViewModel.searchForWord(query);
                 controller.navigate(R.id.action_to_dictionary);
                 reinstateTabLayout();
+                storeCurrentSearchTerm();
                 wordSearchView.onActionViewCollapsed();
                 return false;
             }
@@ -113,13 +115,9 @@ public class MainActivity extends BaseActivity  implements DictionaryFragmentsLi
 
     @Override
     public boolean onOptionsItemSelected(MenuItem menuItem) {
-        SharedPreferences.Editor editor = getPreferences(MODE_PRIVATE).edit();
         switch (menuItem.getItemId()) {
             case (R.id.action_settings_and_help):
-                Intent settings_and_help_intent = new Intent(this, SettingsAndHelpActivity.class);
-                editor.putString("query", wordSearchView.getQuery().toString());
-                editor.commit();
-                startActivity(settings_and_help_intent);
+                startActivity(new Intent(MainActivity.this, SettingsAndHelpActivity.class));
                 return true;
             case (R.id.action_rate_app):
                 startActivity(SettingsAndHelpActivity.getAppStoreRatingIntent());
@@ -135,7 +133,6 @@ public class MainActivity extends BaseActivity  implements DictionaryFragmentsLi
     @Override
     public void onListFragmentInteraction(String word) {
         mainViewModel.searchForWord(word);
-
         for (Fragment frag:  ((NavHostFragment)getSupportFragmentManager()
                 .getPrimaryNavigationFragment())
                 .getChildFragmentManager()
@@ -158,9 +155,10 @@ public class MainActivity extends BaseActivity  implements DictionaryFragmentsLi
 
     public void returnFromSearch(String word) {
         mainViewModel.searchForWord(word);
-        wordSearchView.onActionViewCollapsed();
         controller.navigate(R.id.action_to_dictionary);
         reinstateTabLayout();
+        storeCurrentSearchTerm();
+        wordSearchView.onActionViewCollapsed();
     }
 
     public TabLayout getTabLayout() {
@@ -184,7 +182,22 @@ public class MainActivity extends BaseActivity  implements DictionaryFragmentsLi
         } else if (current_destination.equals("fragment_search_dialog")) {
             controller.navigate(R.id.action_to_dictionary);
             reinstateTabLayout();
+            storeCurrentSearchTerm();
             wordSearchView.onActionViewCollapsed();
         }
+    }
+
+    @Override
+    public void storeCurrentSearchTerm() {
+        String queryStore = wordSearchView.getQuery().toString();
+        SharedPreferences.Editor editor = getPreferences(MODE_PRIVATE).edit();
+        editor.putString("query", queryStore);
+        editor.commit();
+        Toast.makeText(this, "storing term: " + queryStore, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public String getCurrentSearchTerm() {
+        return getPreferences(MainActivity.MODE_PRIVATE).getString("query", "");
     }
 }

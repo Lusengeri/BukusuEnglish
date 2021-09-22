@@ -103,4 +103,14 @@ public class DictionaryLookupFragment extends Fragment implements DictionaryFrag
     public String getCurrentWord() {
         return mainViewModel.getCurrentWord().getValue().getWord();
     }
+
+    @Override
+    public String getCurrentSearchTerm() {
+        return null;
+    }
+
+    @Override
+    public void storeCurrentSearchTerm() {
+
+    }
 }

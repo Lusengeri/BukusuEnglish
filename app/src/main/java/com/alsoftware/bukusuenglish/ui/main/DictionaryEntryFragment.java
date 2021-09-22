@@ -6,6 +6,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 
@@ -19,6 +20,7 @@ import com.alsoftware.bukusuenglish.R;
 import com.alsoftware.bukusuenglish.database.DictEntry;
 
 public class DictionaryEntryFragment extends Fragment {
+    private CardView definitionCard;
     private TextView posView;
     private TextView colonView;
     private TextView wordView;
@@ -48,7 +50,7 @@ public class DictionaryEntryFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_search_result, container, false);
+        View view = inflater.inflate(R.layout.fragment_dictionary_entry, container, false);
         posView = view.findViewById(R.id.posView);
         colonView = view.findViewById(R.id.colonView);
         wordView = view.findViewById(R.id.wordView);
@@ -57,6 +59,7 @@ public class DictionaryEntryFragment extends Fragment {
         definitionView = view.findViewById(R.id.definitionView);
         dividingLine = view.findViewById(R.id.dividingLine);
         messageView = view.findViewById(R.id.messageView);
+        definitionCard = view.findViewById(R.id.cardView);
         setDefaultDefinitionText();
         return view;
     }
@@ -82,13 +85,7 @@ public class DictionaryEntryFragment extends Fragment {
     }
 
     public void showSelectedDefinition(String word, String pos, String definition, String unaccented) {
-        posView.setVisibility(View.VISIBLE);
-        colonView.setVisibility(View.VISIBLE);
-        wordView.setVisibility(View.VISIBLE);
-        pronunciationView.setVisibility(View.VISIBLE);
-        definitionNum.setVisibility(View.VISIBLE);
-        definitionView.setVisibility(View.VISIBLE);
-        dividingLine.setVisibility(View.VISIBLE);
+        definitionCard.setVisibility(View.VISIBLE);
         messageView.setVisibility(View.INVISIBLE);
 
         if (word.equals(null)) {
@@ -128,14 +125,7 @@ public class DictionaryEntryFragment extends Fragment {
     }
 
     public void showUnsuccessful(String message) {
-        posView.setVisibility(View.INVISIBLE);
-        colonView.setVisibility(View.INVISIBLE);
-        wordView.setVisibility(View.INVISIBLE);
-        pronunciationView.setVisibility(View.INVISIBLE);
-        definitionNum.setVisibility(View.INVISIBLE);
-        definitionView.setVisibility(View.INVISIBLE);
-        dividingLine.setVisibility(View.INVISIBLE);
-
+        definitionCard.setVisibility(View.INVISIBLE);
         messageView.setVisibility(View.VISIBLE);
         messageView.setText(message);
     }

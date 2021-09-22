@@ -10,7 +10,6 @@
     <string name="help_menu_header">App usage and general info.</string>
     <string name="feedback_header"> Contact Us</string>
     <string name="about_header">About</string>
-    <string name="look_up">LOOK UP</string>
     <string name="title_activity_settings_and_help">Settings &amp; Help</string>
     <string name="title_activity_settings">Display Settings</string>
     <string name="definition">DEFINITION</string>
@@ -107,5 +106,6 @@ Kindly tap on the &#39;Contact Us&#39; link in the &#39;Help &amp; Settings&#39;
     </string>
     <string name="colon">:</string>
     <string name="app_logo_and_name">App logo and name</string>
+    <string name="lookup">LOOKUP</string>
 
 </resources>

@@ -1,11 +1,13 @@
 package com.alsoftware.bukusuenglish.alphabetscroll;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.preference.PreferenceManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -78,11 +80,15 @@ public class AlphabetScrollRecyclerViewAdapter extends AlphabetScrollRecyclerVie
 
         if (word.equals(mListener.getCurrentWord())) {
             if (currentTheme == R.style.CustomAppTheme) {
-                holder.wordView.setBackgroundColor(ctx.getResources().getColor(R.color.primaryLight));
-                holder.wordView.setTextColor(ctx.getResources().getColor(R.color.brightWhite));
+                holder.wordView.setBackgroundColor(ctx.getResources().getColor(R.color.list_card_highlight_light));
+                holder.wordView.setTextColor(ctx.getResources().getColor(R.color.primaryLight));
             } else {
-                holder.wordView.setBackgroundColor(ctx.getResources().getColor(R.color.brightWhite));
-                holder.wordView.setTextColor(ctx.getResources().getColor(R.color.primaryDark));
+                holder.wordView.setBackgroundColor(ctx.getResources().getColor(R.color.list_card_highlight_dark));
+                holder.wordView.setTextColor(ctx.getResources().getColor(R.color.brightWhite));
+            }
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                holder.background.setElevation(6.0F);
             }
         } else {
             if (currentTheme == R.style.CustomAppTheme) {
@@ -92,9 +98,13 @@ public class AlphabetScrollRecyclerViewAdapter extends AlphabetScrollRecyclerVie
                 holder.wordView.setBackgroundColor(ctx.getResources().getColor(R.color.surfaceDark));
                 holder.wordView.setTextColor(ctx.getResources().getColor(R.color.brightWhite));
             }
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                holder.background.setElevation(0.0F);
+            }
         }
 
-        holder.wordView.setOnClickListener(new View.OnClickListener() {
+        holder.layoutView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mListener.onListFragmentInteraction(holder.wordView.getText().toString());
@@ -124,10 +134,14 @@ public class AlphabetScrollRecyclerViewAdapter extends AlphabetScrollRecyclerVie
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public final TextView wordView;
+        public final CardView background;
+        public final View layoutView;
 
         public ViewHolder(View view) {
             super(view);
-            wordView = view.findViewById(R.id.dictionaryWord);
+            layoutView = view;
+            wordView = view.findViewById(R.id.wordTextView);
+            background = view.findViewById(R.id.backgroundCardView);
         }
     }
 }
