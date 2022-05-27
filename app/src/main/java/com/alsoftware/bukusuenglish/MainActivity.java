@@ -4,7 +4,6 @@ import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
-import androidx.lifecycle.SavedStateViewModelFactory;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -17,7 +16,6 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
 import com.alsoftware.bukusuenglish.database.DictEntry;
 import com.alsoftware.bukusuenglish.ui.main.DictionaryFragmentsListener;
@@ -57,8 +55,7 @@ public class MainActivity extends BaseActivity  implements DictionaryFragmentsLi
     }
 
     private void configureDataSources() {
-        SavedStateViewModelFactory factory = new SavedStateViewModelFactory(getApplication(),this);
-        mainViewModel = new ViewModelProvider(this, factory).get(MainViewModel.class);
+        mainViewModel = new ViewModelProvider(this).get(MainViewModel.class);
 
         Observer<DictEntry> currentWordObserver = dictEntry -> {
             if (!dictEntry.getUnaccented().equals("")) {
@@ -193,7 +190,6 @@ public class MainActivity extends BaseActivity  implements DictionaryFragmentsLi
         SharedPreferences.Editor editor = getPreferences(MODE_PRIVATE).edit();
         editor.putString("query", queryStore);
         editor.commit();
-        Toast.makeText(this, "storing term: " + queryStore, Toast.LENGTH_SHORT).show();
     }
 
     @Override
