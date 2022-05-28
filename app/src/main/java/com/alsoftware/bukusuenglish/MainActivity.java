@@ -1,5 +1,6 @@
 package com.alsoftware.bukusuenglish;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
@@ -29,6 +30,7 @@ public class MainActivity extends BaseActivity  implements DictionaryFragmentsLi
     private String currentWord;
     private NavController controller;
     private TabLayout tabLayout;
+    private ActionBar actionBar;
 
     public MainViewModel getMainViewModel() {
         return mainViewModel;
@@ -41,6 +43,8 @@ public class MainActivity extends BaseActivity  implements DictionaryFragmentsLi
 
         Toolbar toolbar = findViewById(R.id.mainToolbar);
         setSupportActionBar(toolbar);
+
+        actionBar = getSupportActionBar();
 
         tabLayout = findViewById(R.id.mainTabLayout);
         currentWord = getPreferences(MainActivity.MODE_PRIVATE).getString("word", null);
@@ -74,19 +78,12 @@ public class MainActivity extends BaseActivity  implements DictionaryFragmentsLi
         wordSearchView.setIconifiedByDefault(true);
         wordSearchView.setQueryHint("Search for a word");
 
-        wordSearchView.setOnSearchClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                wordSearchView.setQuery(getPreferences(MainActivity.MODE_PRIVATE).getString("query", null), false);
-                removeTabLayout();
-                controller.navigate(R.id.action_to_search);
-                removeTabLayout();
-            }
+        wordSearchView.setOnSearchClickListener(view -> {
+            displaySearchFragment();
         });
 
         wordSearchView.setOnCloseListener(() -> {
-            controller.navigate(R.id.action_to_dictionary);
-            reinstateTabLayout();
+            hideSearchFragment();
             return false;
         });
 
@@ -94,10 +91,7 @@ public class MainActivity extends BaseActivity  implements DictionaryFragmentsLi
             @Override
             public boolean onQueryTextSubmit(String query) {
                 mainViewModel.searchForWord(query);
-                controller.navigate(R.id.action_to_dictionary);
-                reinstateTabLayout();
-                storeCurrentSearchTerm();
-                wordSearchView.onActionViewCollapsed();
+                hideSearchFragment();
                 return false;
             }
 
@@ -108,6 +102,40 @@ public class MainActivity extends BaseActivity  implements DictionaryFragmentsLi
             }
         });
         return true;
+    }
+
+    private void displaySearchFragment() {
+        controller.navigate(R.id.action_to_search);
+        tabLayout.setVisibility(View.GONE);
+        wordSearchView.setQuery(getPreferences(MainActivity.MODE_PRIVATE).getString("query", null), false);
+        enableUpButton();
+    }
+
+    private void hideSearchFragment() {
+        disableUpButton();
+        storeCurrentSearchTerm();
+        controller.navigate(R.id.action_to_dictionary);
+        wordSearchView.onActionViewCollapsed();
+        tabLayout.setVisibility(View.VISIBLE);
+    }
+
+    public void returnFromSearch(String word) {
+        mainViewModel.searchForWord(word);
+        hideSearchFragment();
+    }
+
+    private void enableUpButton() {
+        actionBar.setDisplayHomeAsUpEnabled(true);
+    }
+
+    private void disableUpButton() {
+        actionBar.setDisplayHomeAsUpEnabled(false);
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        hideSearchFragment();
+        return false;
     }
 
     @Override
@@ -150,24 +178,8 @@ public class MainActivity extends BaseActivity  implements DictionaryFragmentsLi
         return currentWord;
     }
 
-    public void returnFromSearch(String word) {
-        mainViewModel.searchForWord(word);
-        controller.navigate(R.id.action_to_dictionary);
-        reinstateTabLayout();
-        storeCurrentSearchTerm();
-        wordSearchView.onActionViewCollapsed();
-    }
-
     public TabLayout getTabLayout() {
         return tabLayout;
-    }
-
-    private void removeTabLayout() {
-        tabLayout.setVisibility(View.GONE);
-    }
-
-    private void reinstateTabLayout() {
-        tabLayout.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -177,10 +189,7 @@ public class MainActivity extends BaseActivity  implements DictionaryFragmentsLi
         if (current_destination.equals("fragment_dictionary_interface")) {
             this.finish();
         } else if (current_destination.equals("fragment_search_dialog")) {
-            controller.navigate(R.id.action_to_dictionary);
-            reinstateTabLayout();
-            storeCurrentSearchTerm();
-            wordSearchView.onActionViewCollapsed();
+            hideSearchFragment();
         }
     }
 
