@@ -1,0 +1,17 @@
+The Bukusu-English Dictionary is an Android app to lookup English definitions of Bukusu words. It is intended to serve as an aid to language learners who know English but who seek to improve their knowledge of the Bukusu language. At least a rudimentary grasp of Bukusu is assumed of the user of the Bukusu-English Dictionary.
+
+The current version of the application allows a user to search for a Bukusu word from the search box within the action bar at the top of the screen.
+
+Suggestions corresponding to the current search term appear as a scrollable drop-down list with individually clickable words.
+
+It is also possible to lookup a specific Bukusu word on the alphabetically ordered list of all available words in the 'LOOKUP' tab on the main application screen.
+
+Upon performing a successful search of a Bukusu word, the Bukusu-English Dictionary displays the Bukusu word on the main screen along with its definition in English.
+
+Searching for words not contained in the dictionary will result in a message communicating an unsuccessful search being displayed on the main screen of the Bukusu-English Dictionary app.
+
+The Bukusu-English Dictionary app is the result of volunteer effort.
+
+As such, the team responsible for developing this app is constantly looking for collaborators and contributors to help make the dictionary better.
+
+Kindly get in touch with the app developers and contribute new words, alternate definitions and usage examples to help make the Bukusu-English Dictionary app great!
