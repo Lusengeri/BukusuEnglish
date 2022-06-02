@@ -32,7 +32,12 @@ platform :android do
 
   desc "Deploy a new version to the Google Play"
   lane :deploy do
-    gradle(task: "clean assembleRelease")
+    gradle(task: "clean bundleRelease")
     upload_to_play_store
+  end
+
+  desc "Increment version code"
+  lane :increment_vc do
+	increment_version_code(gradle_file_path: "./app/build.gradle",)
   end
 end
