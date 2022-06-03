@@ -11,7 +11,7 @@
     <PreferenceCategory
         app:layout="@layout/preference_category_layout">
         <Preference
-            app:title="Version 1.3.2"
+            app:title="Version 1.3.4"
             app:layout="@layout/preference_option_layout"
             app:icon="@drawable/serialization_128"/>
     </PreferenceCategory>
@@ -37,7 +37,7 @@
     <PreferenceCategory
         app:layout="@layout/preference_category_layout">
         <Preference
-            app:title="Copyright © 2021 AL Software"
+            app:title="Copyright © 2022 AL Software"
             app:layout="@layout/preference_option_layout"
             app:icon="@drawable/copyright_128"/>
     </PreferenceCategory>

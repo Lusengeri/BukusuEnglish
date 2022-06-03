@@ -12,3 +12,7 @@
 /captures
 .externalNativeBuild
 .cxx
+/play_config.json
+/play_config.json.b64
+/keystore.properties
+/app/keystore.jks
