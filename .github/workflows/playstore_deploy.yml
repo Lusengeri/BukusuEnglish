@@ -11,19 +11,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
   
       - name: install ruby
-        uses: actions/setup-ruby@v1
+        uses: ruby/setup-ruby@v1
         with:
           ruby-version: '3.0'
-             
-      - name: install bundle
-        run: |
-          bundle config path vendor/bundle
-          bundle install --jobs 4 --retry 3
+          bundler-cache: true
 
-      - name: Configure Keystore
+      - name: configure keystore
         run: |
           echo "$ANDROID_KEYSTORE_FILE" > keystore.jks.b64
           base64 -d -i keystore.jks.b64 > app/keystore.jks
@@ -37,12 +33,12 @@ jobs:
           KEYSTORE_KEY_PASSWORD: ${{ secrets.KEYSTORE_KEY_PASSWORD  }}
           KEYSTORE_STORE_PASSWORD: ${{ secrets.KEYSTORE_STORE_PASSWORD  }}
 
-      - name: Create Google Play Config file
+      - name: create Google Play config file
         run : |
           echo "$PLAY_CONFIG_JSON" > play_config.json.b64
           base64 -d -i play_config.json.b64 > play_config.json
         env:
           PLAY_CONFIG_JSON: ${{ secrets.PLAY_CONFIG_JSON  }}
 
-      - name: Distribute app to Beta track 
-        run: bundle exec fastlane deploy 
+      - name: distribute app to Google Playstore
+        run: bundle exec fastlane deploy
